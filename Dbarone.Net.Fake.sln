@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dbarone.Net.Fake", "Dbarone.Net.Fake\Dbarone.Net.Fake.csproj", "{5E057BC4-F363-477F-BA1B-3BF60CEC2841}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dbarone.Net.Fake.Tests", "Dbarone.Net.Fake.Tests\Dbarone.Net.Fake.Tests.csproj", "{40ABC81A-6DE8-4B1D-8DF9-1CE97DD28EEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E057BC4-F363-477F-BA1B-3BF60CEC2841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E057BC4-F363-477F-BA1B-3BF60CEC2841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E057BC4-F363-477F-BA1B-3BF60CEC2841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E057BC4-F363-477F-BA1B-3BF60CEC2841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40ABC81A-6DE8-4B1D-8DF9-1CE97DD28EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40ABC81A-6DE8-4B1D-8DF9-1CE97DD28EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40ABC81A-6DE8-4B1D-8DF9-1CE97DD28EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40ABC81A-6DE8-4B1D-8DF9-1CE97DD28EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
