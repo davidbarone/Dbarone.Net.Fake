@@ -1,3 +1,4 @@
+namespace Dbarone.Net.Fake;
 
 /// <summary>
 /// Generates a sequential list of integers.

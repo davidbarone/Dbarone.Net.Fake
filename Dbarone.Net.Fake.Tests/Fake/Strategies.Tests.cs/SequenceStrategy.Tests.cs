@@ -46,5 +46,4 @@ public class SequenceStrategyTests
         Assert.Equal(1001468, ints[999]);   // approx 1000 * 150%
         Assert.Equal(1000, ints.Distinct().Count());
     }
-
 }
