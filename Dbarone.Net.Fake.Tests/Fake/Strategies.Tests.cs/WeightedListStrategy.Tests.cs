@@ -11,10 +11,14 @@ public class WeightedListStrategyTests
     [Fact]
     public void BoysNames()
     {
+        List<string> names = new List<string>();
         WeightedListStrategy s = new WeightedListStrategy();
         s.List = WeightedListEnum.Names_Boy;
-        var name = s.Next(0);
+        for (int i = 0; i < 100; i++)
+        {
+            var name = (string)s.Next(i);
+            names.Add(name);
+        }
         var aa = 0;
     }
-
 }
