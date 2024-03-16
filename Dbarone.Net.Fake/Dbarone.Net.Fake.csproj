@@ -12,5 +12,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Datasets\Names_Boy.csv" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dbarone.Net.Csv" Version="1.0.1" />
+  </ItemGroup>
 
 </Project>
