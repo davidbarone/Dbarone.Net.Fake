@@ -8,26 +8,28 @@ namespace Dbarone.Net.Fake;
 /// </summary>
 public class WeightedListStrategy : IFakerStrategy
 {
-    public IRandom Random { get; set; } = new Lcg();
+    // Private members
     private IList<IDictionary<string, object>>? data = null;
     private int totalWeight { get; set; }
+    private WeightedListEnum list;
 
-    private WeightedListEnum _list;
+    public IRandom Random { get; set; } = new Lcg();
     public WeightedListEnum List
     {
-        get { return _list; }
+        get { return list; }
         set
         {
-            var list = value.ToString();
+            this.list = value;
+            var listStr = value.ToString();
             var assembly = this.GetType().GetTypeInfo().Assembly;
-            var path = $"{assembly.GetName().Name}.Datasets.{list}.csv";
+            var path = $"{assembly.GetName().Name}.Datasets.{listStr}.csv";
             Stream resource = assembly.GetManifestResourceStream(path)!;
 
             CsvConfiguration configuration = new CsvConfiguration
             {
                 ProcessRowHandler = (int record, string[] headers, ref object[]? values) =>
                 {
-                    values[1] = int.Parse(((string)values[1]).Replace(",", ""));   // weight
+                    values[1] = int.Parse((string)values[1]);   // weight
                     return true;
                 }
             };
@@ -48,7 +50,7 @@ public class WeightedListStrategy : IFakerStrategy
         {
             value = (string)this.data![j]["Value"];
             total += (int)this.data![j]["Weight"];
-            if (total >= rand)
+            if (total > rand)
             {
                 break;
             }

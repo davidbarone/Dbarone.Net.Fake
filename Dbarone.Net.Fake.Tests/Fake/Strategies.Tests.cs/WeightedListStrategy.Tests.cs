@@ -21,4 +21,33 @@ public class WeightedListStrategyTests
         }
         var aa = 0;
     }
+
+    [Fact]
+    public void GirlsNames()
+    {
+        List<string> names = new List<string>();
+        WeightedListStrategy s = new WeightedListStrategy();
+        s.List = WeightedListEnum.Names_Girl;
+        for (int i = 0; i < 100; i++)
+        {
+            var name = (string)s.Next(i);
+            names.Add(name);
+        }
+        var aa = 0;
+    }
+
+    [Fact]
+    public void SurnamesUSCensus2010()
+    {
+        List<string> names = new List<string>();
+        WeightedListStrategy s = new WeightedListStrategy();
+        s.List = WeightedListEnum.Surnames_US_Census_2010;
+        for (int i = 0; i < 10; i++)
+        {
+            var name = (string)s.Next(i);
+            names.Add(name);
+        }
+        var aa = 0;
+    }
+
 }

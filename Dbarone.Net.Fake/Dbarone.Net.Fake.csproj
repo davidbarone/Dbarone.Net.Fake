@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Content Remove="Datasets\Names_Boy.csv" />
+    <Content Remove="Datasets\Names_Girl.csv" />
+    <Content Remove="Datasets\Surnames_US_Census_2010.csv" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Datasets\Names_Boy.csv" />
+    <EmbeddedResource Include="Datasets\Names_Girl.csv" />
+    <EmbeddedResource Include="Datasets\Surnames_US_Census_2010.csv" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dbarone.Net.Csv" Version="1.0.1" />
