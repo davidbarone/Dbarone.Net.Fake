@@ -10,9 +10,27 @@ public class WeightedListStrategy : IFakerStrategy<string>
 {
     public WeightedListStrategy(WeightedListEnum list) : this(list, new Lcg()) { }
 
+    public WeightedListStrategy(IList<WeightedListItem> data, IRandom<double> random)
+    {
+        this.Random = random;
+        this.data = data;
+        this.TotalWeight = this.data.Sum(d => d.Weight);
+    }
+
     public WeightedListStrategy(WeightedListEnum list, IRandom<double> random)
     {
         this.Random = random;
+        this.data = GetItemsFromList(list);
+        this.TotalWeight = this.data.Sum(d => d.Weight);
+    }
+
+    // Private members
+    private IList<WeightedListItem>? data = null;
+    public int TotalWeight { get; set; }
+    public WeightedListEnum List { get; set; }
+    public IRandom<double> Random { get; set; } = new Lcg();
+
+    private IList<WeightedListItem> GetItemsFromList(WeightedListEnum list) {
         this.List = list;
         var listStr = list.ToString();
         var assembly = this.GetType().GetTypeInfo().Assembly;
@@ -29,15 +47,9 @@ public class WeightedListStrategy : IFakerStrategy<string>
         };
 
         CsvReader csv = new CsvReader(resource, configuration);
-        this.data = csv.Read().ToList();
-        this.TotalWeight = this.data.Sum(d => (int)d["Weight"]);
+        var data = csv.Read().Select(d => new WeightedListItem { Value = (string)d["Value"], Weight = (int)d["Weight"] });
+        return data.ToList();
     }
-
-    // Private members
-    private IList<IDictionary<string, object>>? data = null;
-    public int TotalWeight { get; set; }
-    public WeightedListEnum List { get; set; }
-    public IRandom<double> Random { get; set; } = new Lcg();
 
     public string Next(int i, string? last = null)
     {
@@ -47,8 +59,8 @@ public class WeightedListStrategy : IFakerStrategy<string>
         string? value = null;
         for (int j = 0; j < this.data!.Count(); j++)
         {
-            value = (string)this.data![j]["Value"];
-            total += (int)this.data![j]["Weight"];
+            value = this.data![j].Value;
+            total += (int)this.data![j].Weight;
             if (total > rand)
             {
                 break;
