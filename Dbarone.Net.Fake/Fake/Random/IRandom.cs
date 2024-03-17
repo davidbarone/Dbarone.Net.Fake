@@ -1,16 +1,18 @@
+namespace Dbarone.Net.Fake;
+
 /// <summary>
-/// Represents a class that implements a random number generator.
+/// Represents a class that implements a random generator.
 /// </summary>
-public interface IRandom {
+public interface IRandom<T> {
 
     /// <summary>
-    /// Returns a pseudo-random number greater than or equal to 0.0, and less than 1.0.
+    /// Returns the next random value.
     /// </summary>
     /// <returns></returns>
-    public double Next();
+    public T Next();
 
     /// <summary>
-    /// Initial seed to generate next random number.
+    /// The seed value.
     /// </summary>
-    public int Seed { get; set; }
+    public long Seed { get; set; }
 }

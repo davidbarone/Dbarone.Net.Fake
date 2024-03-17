@@ -1,16 +1,23 @@
+namespace Dbarone.Net.Fake;
+
 /// <summary>
 /// Implementation of Box-Muller Transform. Generates pairs of independent, standard, normally distributed random numbers.
 /// see: https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
 /// </summary>
-public class BoxMullerTransform : IRandom
+public class BoxMullerTransform : AbstractRandom<double>
 {
-    public int Seed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public BoxMullerTransform() : base() { }
+    public BoxMullerTransform(IRandom<double> random, double mean, double stdDev, long seed) : base(seed) {
+        this.Mean = mean;
+        this.StdDev = stdDev;
+        this.Random = random;
+    }
 
     public double Mean { get; set; }
     public double StdDev { get; set; }
-    public IRandom Random { get; set; } = new Lcg();
+    public IRandom<double> Random { get; set; } = new Lcg();
 
-    public double Next()
+    public override double Next()
     {
         const double two_pi = 2.0 * Math.PI;
         double u1, u2;

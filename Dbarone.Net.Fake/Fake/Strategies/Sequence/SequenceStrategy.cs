@@ -19,7 +19,7 @@ public class SequenceStrategy
     /// <summary>
     /// The random number generator.
     /// </summary>
-    public IRandom Random { get; set; } = new Lcg();
+    public IRandom<double> Random { get; set; } = new Lcg();
 
     public object Next(int i, object? last = null)
     {
