@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Datasets\Names_Boy.csv" />
-    <Content Remove="Datasets\Names_Girl.csv" />
+    <Content Remove="Datasets\en_GB_Names_Boy.csv" />
+    <Content Remove="Datasets\en_GB_Names_Girl.csv" />
+    <Content Remove="Datasets\en_GB_Street_Names_Simple.csv" />
+    <Content Remove="Datasets\en_GB_Street_Names_Compound.csv" />
+    <Content Remove="Datasets\en_GB_Street_Types.csv" />
     <Content Remove="Datasets\Surnames_US_Census_2010.csv" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Datasets\Names_Boy.csv" />
-    <EmbeddedResource Include="Datasets\Names_Girl.csv" />
+    <EmbeddedResource Include="Datasets\en_GB_Names_Boy.csv" />
+    <EmbeddedResource Include="Datasets\en_GB_Names_Girl.csv" />
+    <EmbeddedResource Include="Datasets\en_GB_Street_Names_Simple.csv" />
+    <EmbeddedResource Include="Datasets\en_GB_Street_Names_Compound.csv" />
+    <EmbeddedResource Include="Datasets\en_GB_Street_Types.csv" />
     <EmbeddedResource Include="Datasets\Surnames_US_Census_2010.csv" />
   </ItemGroup>
   <ItemGroup>

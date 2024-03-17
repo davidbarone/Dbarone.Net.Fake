@@ -12,8 +12,7 @@ public class WeightedListStrategyTests
     public void BoysNames()
     {
         List<string> names = new List<string>();
-        WeightedListStrategy s = new WeightedListStrategy();
-        s.List = WeightedListEnum.Names_Boy;
+        WeightedListStrategy s = new WeightedListStrategy(WeightedListEnum.en_GB_Names_Boy);
         for (int i = 0; i < 100; i++)
         {
             var name = (string)s.Next(i);
@@ -26,8 +25,7 @@ public class WeightedListStrategyTests
     public void GirlsNames()
     {
         List<string> names = new List<string>();
-        WeightedListStrategy s = new WeightedListStrategy();
-        s.List = WeightedListEnum.Names_Girl;
+        WeightedListStrategy s = new WeightedListStrategy(WeightedListEnum.en_GB_Names_Girl);
         for (int i = 0; i < 100; i++)
         {
             var name = (string)s.Next(i);
@@ -40,8 +38,7 @@ public class WeightedListStrategyTests
     public void SurnamesUSCensus2010()
     {
         List<string> names = new List<string>();
-        WeightedListStrategy s = new WeightedListStrategy();
-        s.List = WeightedListEnum.Surnames_US_Census_2010;
+        WeightedListStrategy s = new WeightedListStrategy(WeightedListEnum.Surnames_US_Census_2010);
         for (int i = 0; i < 10; i++)
         {
             var name = (string)s.Next(i);
