@@ -11,6 +11,8 @@ public class WilliamFakespearStrategy
     /// </summary>
     public int Order { get; set; } = 1;
 
+    public Queue<string> queue = new Queue<string>();
+    
     public Dictionary<string, int> matrix = new Dictionary<string, int>();
 
     public string[] TokenDelimiters { get; set; } = new string[] { " " };
@@ -25,9 +27,9 @@ public class WilliamFakespearStrategy
         if (start >= 0 && end >= 0)
         {
             // remove stage directions from line
-            line = line.Substring(start + 1, line.Length - end - 1);
+            line = line.Substring(line.Length - end);
         }
-        return line;
+        return line.Trim();
     }
     public bool ShouldIncludeLine(string line, int index, ref Dictionary<string, object> state)
     {
@@ -49,7 +51,7 @@ public class WilliamFakespearStrategy
         }
         else if (line.Trim().Equals(line.Trim().ToUpper()) && line.Reverse().ToList()[0] == '.')
         {
-            // Dramatis Personae
+            // Named part / speaker
             return false;
         }
         else if (line.Trim().StartsWith('[') && line.Trim().EndsWith(']'))
@@ -62,14 +64,14 @@ public class WilliamFakespearStrategy
             state["Dramatis Personæ"] = true;
             return false;
         }
-        else if (line.ToUpper().StartsWith("SCENE") || line.ToUpper().StartsWith("ACT"))
-        {
-            return false;
-        }
         else if (line.ToUpper().StartsWith("SCENE I.") && state.ContainsKey("Dramatis Personæ") && (bool)state["Dramatis Personæ"] == true && line.Trim().Length > "SCENE I.".Length)
         {
             state["Dramatis Personæ"] = false;
             state["InContents"] = false;
+            return false;
+        }
+        else if (line.ToUpper().StartsWith("SCENE") || line.ToUpper().StartsWith("ACT"))
+        {
             return false;
         }
         else if (int.TryParse(line.Trim(), out i) == true)
@@ -81,7 +83,10 @@ public class WilliamFakespearStrategy
         {
             return false;
         }
-
+        else if (line.Equals(line.ToUpper())){
+            // ignore lines completely in upper case
+            return false;
+        }
         else
         {
             return true;
@@ -104,14 +109,10 @@ public class WilliamFakespearStrategy
         while (next is not null)
         {
             line++;
-            if (line > 5000) {
-                var aa = 123;
-            }
-            next = sr.ReadLine();
             if (next is not null && ShouldIncludeLine(next, line, ref state))
             {
                 var processed = next;
-                //processed = PreProcessLine(next);
+                processed = PreProcessLine(next);
                 lines.Add(processed);
                 linesIncluded++;
                 if (processed is not null)
@@ -126,6 +127,7 @@ public class WilliamFakespearStrategy
                     }
                 }
             }
+            next = sr.ReadLine();
         }
         File.WriteAllLines(outputPath, lines);
         var b = matrix.Keys.Count();
