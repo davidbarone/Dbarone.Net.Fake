@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Dbarone.Net.Fake;
 
 /// <summary>
 /// Markov chain text generator based on complete works of William Shakespear.
@@ -11,9 +12,7 @@ public class WilliamFakespearStrategy
     /// </summary>
     public int Order { get; set; } = 1;
 
-    public Queue<string> queue = new Queue<string>();
-    
-    public Dictionary<string, int> matrix = new Dictionary<string, int>();
+    public Dictionary<string[], Dictionary<string, double>> Matrix = new Dictionary<string[], Dictionary<string, double>>(new StateComparer());
 
     public string[] TokenDelimiters { get; set; } = new string[] { " " };
 
@@ -83,7 +82,8 @@ public class WilliamFakespearStrategy
         {
             return false;
         }
-        else if (line.Equals(line.ToUpper())){
+        else if (line.Equals(line.ToUpper()))
+        {
             // ignore lines completely in upper case
             return false;
         }
@@ -93,11 +93,12 @@ public class WilliamFakespearStrategy
         }
     }
 
-    public WilliamFakespearStrategy()
+    public void CreateModel()
     {
         // Read text corpus to generate transition matrix
         var str = File.Open("C:\\Users\\david\\Desktop\\WilliamShakespear.txt", FileMode.Open);
         var outputPath = "C:\\Users\\david\\Desktop\\WilliamShakespear_Output.txt";
+        Queue<string> queue = new Queue<string>();  // stores the current state
 
         var sr = new StreamReader(str);
         Dictionary<string, object> state = new Dictionary<string, object>();
@@ -120,18 +121,57 @@ public class WilliamFakespearStrategy
                     var tokens = processed.Split(TokenDelimiters, StringSplitOptions.TrimEntries);
                     foreach (var token in tokens)
                     {
-                        if (!matrix.ContainsKey(token))
+                        // Check if the queue is full:
+                        if (queue.Count() == this.Order)
                         {
-                            matrix.Add(token, 0);
+                            // Add the next token into the matrix
+                            if (!Matrix[queue.ToArray()].ContainsKey(token))
+                            {
+                                Matrix[queue.ToArray()][token] = 0;
+                            }
+
+                            // Update the transition matrix
+                            Matrix[queue.ToArray()][token]++;
+
+                            // remove the oldest item
+                            queue.Dequeue();
+                        }
+                        queue.Enqueue(token);
+
+                        var key = queue.ToArray();
+                        if (!Matrix.ContainsKey(key) && queue.Count() == this.Order)
+                        {
+                            Matrix.Add(key, new Dictionary<string, double>());
                         }
                     }
                 }
             }
             next = sr.ReadLine();
         }
+
+        // Next we convert to probability
+        foreach (var key1 in this.Matrix.Keys)
+        {
+            double total = 0;
+            foreach (var key2 in this.Matrix[key1].Keys)
+            {
+                total = total + (double)this.Matrix[key1][key2];
+            }
+            // Now we rewrite values between 0 and 1
+            foreach (var key2 in this.Matrix[key1].Keys)
+            {
+                this.Matrix[key1][key2] = this.Matrix[key1][key2] / total;
+            }
+        }
+
         File.WriteAllLines(outputPath, lines);
-        var b = matrix.Keys.Count();
+        var b = Matrix.Keys.Count();
         var a = line;
+
+    }
+
+    public WilliamFakespearStrategy()
+    {
 
     }
 }
