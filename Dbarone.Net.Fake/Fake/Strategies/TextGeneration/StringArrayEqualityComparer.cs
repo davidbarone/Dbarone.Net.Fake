@@ -1,6 +1,6 @@
 namespace Dbarone.Net.Fake;
 
-public class StateComparer : IEqualityComparer<string[]>
+public class StringArrayEqualityComparer : IEqualityComparer<string[]>
 {
     public bool Equals(string[] x, string[] y)
     {

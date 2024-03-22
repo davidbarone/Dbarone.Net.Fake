@@ -4,19 +4,40 @@ using Dbarone.Net.Fake;
 /// <summary>
 /// Markov chain text generator based on complete works of William Shakespear.
 /// </summary>
-public class WilliamFakespearStrategy
+public class WilliamFakespearStrategy : IFakerStrategy<string>
 {
+    public WilliamFakespearStrategy() : this(new Lcg()) { }
+
+    public WilliamFakespearStrategy(IRandom<double> random)
+    {
+        this.Random = random;
+    }
 
     /// <summary>
-    /// Number of states to be considered when generating the next state. 1 means only current state considered. 2 means current and previous states considered.
+    /// Number of states to be considered when generating the next state.
+    /// 1 means only current state considered.
+    /// 2 means current and previous states considered.
     /// </summary>
     public int Order { get; set; } = 1;
 
-    public Dictionary<string[], Dictionary<string, double>> Matrix = new Dictionary<string[], Dictionary<string, double>>(new StateComparer());
+    /// <summary>
+    /// The random number generator used.
+    /// </summary>
+    public IRandom<double> Random { get; set; } = new Lcg();
 
+    /// <summary>
+    /// The transformation matrix. Defines the current states, and the next possible states.
+    /// </summary>
+    public Dictionary<string[], Dictionary<string, double>> Matrix = new Dictionary<string[], Dictionary<string, double>>(new StringArrayEqualityComparer());
+
+    /// <summary>
+    /// Define the token delimiters. Defaults to ' ' character.
+    /// </summary>
     public string[] TokenDelimiters { get; set; } = new string[] { " " };
 
     public List<string> IgnoredLines { get; set; } = new List<string>();
+
+    private Queue<string>? CurrentState = null;
 
     public string PreProcessLine(string line)
     {
@@ -170,8 +191,44 @@ public class WilliamFakespearStrategy
 
     }
 
-    public WilliamFakespearStrategy()
+    private Queue<string> GetStartingState(double rnd)
     {
+        // Get a random existing state if non exists
+        int i = (int)(rnd * this.Matrix.Keys.Count());
+        var values = Matrix.Keys.OrderBy(k => k, new StringArrayComparer()).ToList()[i];
+        return new Queue<string>(values);
+    }
 
+    public string Next(int i, string? last = null)
+    {
+        var rnd = Random.Next();
+
+        if (CurrentState is null)
+        {
+            this.CurrentState = GetStartingState(rnd);
+        }
+
+        // Get a random next value, weighted by weights
+        var dictValues = Matrix[this.CurrentState.ToArray()];
+        var dictKeys = dictValues.Keys.OrderBy(k => k).ToList();
+        double total = 0;
+        string selectedKey = dictKeys.First();
+
+        for (int j = 0; j < dictKeys.Count(); j++)
+        {
+            total = total + dictValues[selectedKey];
+            if (rnd > total)
+            {
+                break;
+            }
+            selectedKey = dictKeys[j];
+        }
+
+        // Update the current state
+        this.CurrentState.Dequeue();
+        this.CurrentState.Enqueue(selectedKey);
+
+        // Now we have the selected key, return it. 
+        return selectedKey;
     }
 }
