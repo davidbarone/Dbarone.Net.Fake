@@ -26,7 +26,7 @@ public class WilliamFakespearStrategy : IFakerStrategy<string>
     public IRandom<double> Random { get; set; } = new Lcg();
 
     /// <summary>
-    /// The transformation matrix. Defines the current states, and the next possible states.
+    /// The transition matrix. Defines the current states, and the next possible states.
     /// </summary>
     public Dictionary<string[], Dictionary<string, double>> Matrix = new Dictionary<string[], Dictionary<string, double>>(new StringArrayEqualityComparer());
 
