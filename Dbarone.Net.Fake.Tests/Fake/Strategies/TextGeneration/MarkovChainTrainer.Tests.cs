@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Dbarone.Net.Fake;
 using Xunit;
-using System.Net;
 using System.Linq;
+using System.Net.Http;
 
 public class MarkovChainTrainerTests
 {
@@ -12,13 +12,11 @@ public class MarkovChainTrainerTests
     public void WilliamFakespearTrainer()
     {
         // Project Gutenberg - Complete works of William Shakespeare
-        string url = "https://www.gutenberg.org/ebooks/100.txt.utf-8";
+        string url = "https://www.gutenberg.org/cache/epub/100/pg100.txt";
         string text = "";
 
-        using (WebClient client = new WebClient())
-        {
-            text = client.DownloadString(url);
-        }
+        HttpClient httpClient = new HttpClient();
+        text = httpClient.GetStringAsync(url).Result;
 
         MarkovChainTrainer trainer = new MarkovChainTrainer();
 

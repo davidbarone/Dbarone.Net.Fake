@@ -21,7 +21,7 @@ public class MarkovChainTrainer
     /// <returns></returns>
     public MarkovChainModel Train(Stream str, string[] tokenDelimiters, int order = 1, IncludeLineDelegate? includeLine = null, ProcessLineDelegate? processLine = null)
     {
-        Dictionary<string[], Dictionary<string, double>> matrix = new Dictionary<string[], Dictionary<string, double>>();
+        Dictionary<string[], Dictionary<string, double>> matrix = new Dictionary<string[], Dictionary<string, double>>(new StringArrayEqualityComparer());
         Queue<string> queue = new Queue<string>();  // stores the current state
         using (var sr = new StreamReader(str))
         {
