@@ -4,7 +4,7 @@ using Dbarone.Net.Fake;
 /// <summary>
 /// Markov chain text generator class.
 /// </summary>
-public class MarkovChainTextStrategy : IFakerStrategy<string>
+public class MarkovChainTextStrategy : ISampler<string>
 {
     private MarkovChainModel Model { get; init; }
 
