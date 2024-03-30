@@ -13,6 +13,7 @@
     <Content Remove="Datasets\en_GB_Street_Names_Compound.csv" />
     <Content Remove="Datasets\en_GB_Street_Types.csv" />
     <Content Remove="Datasets\Surnames_US_Census_2010.csv" />
+    <Content Remove="Datasets\en_GB_Postcode_Districts.csv" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Datasets\en_GB_Names_Boy.csv" />
@@ -21,6 +22,7 @@
     <EmbeddedResource Include="Datasets\en_GB_Street_Names_Compound.csv" />
     <EmbeddedResource Include="Datasets\en_GB_Street_Types.csv" />
     <EmbeddedResource Include="Datasets\Surnames_US_Census_2010.csv" />
+    <EmbeddedResource Include="Datasets\en_GB_Postcode_Districts.csv" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dbarone.Net.Csv" Version="1.0.1" />

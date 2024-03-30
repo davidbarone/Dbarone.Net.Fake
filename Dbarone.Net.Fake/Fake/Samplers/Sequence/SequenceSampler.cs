@@ -1,11 +1,10 @@
 namespace Dbarone.Net.Fake;
 
 /// <summary>
-/// Generates a sequential list of integers.
+/// Generates a sequential list of integers. Can generate auto-identity or sequence numbers with naturally occuring gaps.
 /// </summary>
-public class SequenceStrategy
+public class SequenceSampler
 {
-
     /// <summary>
     /// A number to determine the skip factor. For numbers x <= 1, next will generate a sequential list of integers with no gaps. For numbers x > 1, a gap will be generated.
     /// </summary>
