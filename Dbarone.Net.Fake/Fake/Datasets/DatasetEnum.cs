@@ -38,9 +38,4 @@ public enum DatasetEnum
     /// names under 10 hits excluded.
     /// </summary>
     en_GB_Street_Names_Types,
-
-    /// <summary>
-    /// A sample of larger UK postcode districts. Includes postcode, post town, locality and weight representing the relative number of households in each locality.
-    /// </summary>
-    en_GB_Postcode_Districts
 }

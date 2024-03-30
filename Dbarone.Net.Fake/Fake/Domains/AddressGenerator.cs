@@ -14,7 +14,7 @@ public class AddressGenerator
 		// https://en.wikipedia.org/wiki/List_of_postcode_areas_in_the_United_Kingdom_by_population
 		// https://www.doogal.co.uk/PostcodeDistricts#google_vignette
 
-		
+
 
 /*
 USE sandpit
@@ -98,7 +98,10 @@ ORDER BY
         var streetNumber = bm.Next() * 10000;
 
         // Street names simple
-        var streetNamesSimple = new WeightedListStrategy(WeightedListEnum.en_GB_Street_Names_Simple);
+        var streetNamesSimple = new WeightedRandomSampler<string>(
+			Dataset.GetData(DatasetEnum.en_GB_Street_Names_Simple),
+			this.Random,
+			(IDictionary<string, object> data, )
         var streetNamesCompound = new WeightedListStrategy(WeightedListEnum.en_GB_Street_Names_Compound);
 
         return null;
