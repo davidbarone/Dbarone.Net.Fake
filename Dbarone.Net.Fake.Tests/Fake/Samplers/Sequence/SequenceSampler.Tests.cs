@@ -4,14 +4,14 @@ using System.Runtime.Intrinsics.X86;
 using Xunit;
 namespace Dbarone.Net.Fake.Tests;
 
-public class SequenceStrategyTests
+public class SequenceSamplerTests
 {
 
     [Fact]
     public void Generate1000NoSkip()
     {
         List<int> ints = new List<int>();
-        SequenceStrategy ss = new SequenceStrategy();
+        SequenceSampler ss = new SequenceSampler();
         ss.Start = 1000000;
         ss.SkipFactor = 0;
         int? s = null;
@@ -31,7 +31,7 @@ public class SequenceStrategyTests
     public void Generate1000WithSkip()
     {
         List<int> ints = new List<int>();
-        SequenceStrategy ss = new SequenceStrategy();
+        SequenceSampler ss = new SequenceSampler();
         ss.Start = 1000000;
         ss.SkipFactor = 1.5;    // 50% of rows will have skipped number.
         int? s = null;

@@ -12,7 +12,14 @@ public class WeightedRandomSampler<T> : ISampler<T>
 
     public double TotalWeight { get; set; }
 
-    public IRandom<double> Random { get; set; } = new Lcg();
+    public IRandom<double> Random { get; set; }
+
+    public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data)
+    {
+        this.Random = new Lcg();
+        this.data = data.ToList();
+        this.TotalWeight = this.data.Sum(d => d.Weight);
+    }
 
     public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data, IRandom<double> random)
     {

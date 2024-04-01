@@ -100,7 +100,7 @@ public class MarkovChainTrainerTests
 
         var configuration = new MarkovChainTrainerConfiguration
         {
-            WordDelimiters = new string[] {" "},
+            WordDelimiters = new string[] { " " },
             Order = 2,
             IncludeLine = includeLine,
             ProcessLine = processLine
@@ -119,18 +119,16 @@ public class MarkovChainTrainerTests
     }
 
     [Theory]
-    [InlineData("When the going gets tough, the tough get going.", 1, 10)]
-    public void SimpleWordTrainers(string corpus, int order, int expectedMatrixSize) {
+    [InlineData("When the going gets tough, the tough get going.", 1, MarkovChainLevel.Word, 10)]
+    public void SimpleWordTrainers(string corpus, int order, MarkovChainLevel level, int expectedMatrixSize)
+    {
         MarkovChainTrainerConfiguration configuration = new MarkovChainTrainerConfiguration
         {
-            Level = MarkovChainLevel.Word,
+            Level = level,
             Order = order
         };
 
         MarkovChainTrainer trainer = new MarkovChainTrainer();
         var model = trainer.Train(corpus, configuration);
-
-
-
     }
 }

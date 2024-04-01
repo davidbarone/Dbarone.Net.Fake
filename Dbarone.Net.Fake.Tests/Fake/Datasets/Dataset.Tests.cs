@@ -7,7 +7,7 @@ public class DatasetTests {
     public void GetData()
     {
         // When
-        var data = Dataset.GetData(DatasetEnum.en_GB_Postcode_Districts);
+        var data = Dataset.GetData(DatasetEnum.Surnames_US_Census_2010);
 
         // Then
         Assert.Equal(6705, data.Count());

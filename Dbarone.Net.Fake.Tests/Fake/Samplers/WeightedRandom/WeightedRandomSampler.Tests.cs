@@ -12,7 +12,10 @@ public class WeightedListStrategyTests
     public void BoysNames()
     {
         List<string> names = new List<string>();
-        WeightedListStrategy s = new WeightedListStrategy(WeightedListEnum.en_GB_Names_Boy);
+        WeightedRandomSampler<string> s = new WeightedRandomSampler<string>(
+            Dataset.GetData(DatasetEnum.en_GB_Names_Boy)
+            .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
+
         for (int i = 0; i < 100; i++)
         {
             var name = (string)s.Next(i);
@@ -25,7 +28,10 @@ public class WeightedListStrategyTests
     public void GirlsNames()
     {
         List<string> names = new List<string>();
-        WeightedListStrategy s = new WeightedListStrategy(WeightedListEnum.en_GB_Names_Girl);
+        WeightedRandomSampler<string> s = new WeightedRandomSampler<string>(
+            Dataset.GetData(DatasetEnum.en_GB_Names_Girl)
+            .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
+
         for (int i = 0; i < 100; i++)
         {
             var name = (string)s.Next(i);
@@ -38,7 +44,10 @@ public class WeightedListStrategyTests
     public void SurnamesUSCensus2010()
     {
         List<string> names = new List<string>();
-        WeightedListStrategy s = new WeightedListStrategy(WeightedListEnum.Surnames_US_Census_2010);
+        WeightedRandomSampler<string> s = new WeightedRandomSampler<string>(
+            Dataset.GetData(DatasetEnum.Surnames_US_Census_2010)
+            .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
+
         for (int i = 0; i < 10; i++)
         {
             var name = (string)s.Next(i);

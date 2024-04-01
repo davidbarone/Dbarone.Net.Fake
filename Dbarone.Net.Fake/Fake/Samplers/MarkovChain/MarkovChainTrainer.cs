@@ -34,8 +34,10 @@ public class MarkovChainTrainer
             while (next is not null)
             {
                 // For character n-grams, we remove punctuation characters.
-                if (configuration.Level==MarkovChainLevel.Character) {
-                    foreach (var item in configuration.PunctuationCharacters) {
+                if (configuration.Level == MarkovChainLevel.Character)
+                {
+                    foreach (var item in configuration.PunctuationCharacters)
+                    {
                         next = next.Replace(item, "");
                     }
                 }
@@ -48,30 +50,16 @@ public class MarkovChainTrainer
                     {
                         // For word n-grams, we split tokens on word boundaries and punctuation characters.
                         var tokenDelimiters = configuration.WordDelimiters;
-                        if (configuration.Level==MarkovChainLevel.Word){
+                        if (configuration.Level == MarkovChainLevel.Word)
+                        {
                             tokenDelimiters = tokenDelimiters.Union(configuration.PunctuationCharacters).ToArray();
                         }
 
                         var tokens = next.Split(tokenDelimiters, StringSplitOptions.TrimEntries);
                         foreach (var token in tokens)
                         {
-                            // Check if the queue is full:
-                            if (queue.Count() == configuration.Order)
-                            {
-                                // Add the next token into the matrix if not present
-                                if (!matrix[queue.ToArray()].ContainsKey(token))
-                                {
-                                    matrix[queue.ToArray()][token] = 0;
-                                }
-
-                                // Update the transition matrix
-                                matrix[queue.ToArray()][token]++;
-
-                                // remove the oldest item
-                                queue.Dequeue();
-                            }
-                            queue.Enqueue(token);
-
+                            // Make sure the current queue is in the transformation matrix
+                            // Can include n-grams with length < Order (e.g. the first words in the corpus).
                             var key = queue.ToArray();
                             if (!matrix.ContainsKey(key) && queue.Count() == configuration.Order)
                             {
@@ -79,6 +67,23 @@ public class MarkovChainTrainer
                                 occurences.Add(key, 0);
                             }
                             occurences[key] = occurences[key] + 1;
+
+                            // Add the next token into the matrix if not present
+                            if (!matrix[queue.ToArray()].ContainsKey(token))
+                            {
+                                matrix[queue.ToArray()][token] = 0;
+                            }
+
+                            // Update the transition matrix
+                            matrix[queue.ToArray()][token]++;
+
+                            // Check if the queue length equals the n-gram size, dequeue the oldest element:
+                            if (queue.Count() == configuration.Order)
+                            {
+                                // remove the oldest item
+                                queue.Dequeue();
+                            }
+                            queue.Enqueue(token);
                         }
                     }
                 }
