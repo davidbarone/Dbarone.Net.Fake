@@ -2,16 +2,16 @@ using System.ComponentModel;
 using Dbarone.Net.Fake;
 
 /// <summary>
-/// Markov chain text generator class.
+/// Markov chain text sampler class. Generates pseudo-random text based on a model known as a transition matrix.
 /// </summary>
-public class MarkovChainTextStrategy : ISampler<string>
+public class MarkovChainSampler : ISampler<string>
 {
     private MarkovChainModel Model { get; init; }
 
     /// <summary>
     /// Default ctor.
     /// </summary>
-    public MarkovChainTextStrategy(MarkovChainModel model) : this(model, new Lcg()) { }
+    public MarkovChainSampler(MarkovChainModel model) : this(model, new Lcg()) { }
 
     /// <summary>
     /// Stores the current state.
@@ -22,7 +22,7 @@ public class MarkovChainTextStrategy : ISampler<string>
     /// Ctor with specified random number generator.
     /// </summary>
     /// <param name="random"></param>
-    public MarkovChainTextStrategy(MarkovChainModel model, IRandom<double> random)
+    public MarkovChainSampler(MarkovChainModel model, IRandom<double> random)
     {
         this.Random = random;
         this.Model = model;

@@ -5,6 +5,7 @@ using Dbarone.Net.Fake;
 using Xunit;
 using System.Linq;
 using System.Net.Http;
+using Xunit.Sdk;
 
 public class MarkovChainTrainerTests
 {
@@ -97,9 +98,17 @@ public class MarkovChainTrainerTests
 
         };
 
-        var model = trainer.Train(text, new string[] { " " }, 2, includeLine, processLine);
+        var configuration = new MarkovChainTrainerConfiguration
+        {
+            WordDelimiters = new string[] {" "},
+            Order = 2,
+            IncludeLine = includeLine,
+            ProcessLine = processLine
+        };
 
-        var markov = new MarkovChainTextStrategy(model);
+        var model = trainer.Train(text, configuration);
+
+        var markov = new MarkovChainSampler(model);
 
         List<string> results = new List<string>();
         for (int i = 0; i < 1000; i++)
@@ -107,5 +116,21 @@ public class MarkovChainTrainerTests
             results.Add(markov.Next(i, null));
         }
         var b = results;
+    }
+
+    [Theory]
+    [InlineData("When the going gets tough, the tough get going.", 1, 10)]
+    public void SimpleWordTrainers(string corpus, int order, int expectedMatrixSize) {
+        MarkovChainTrainerConfiguration configuration = new MarkovChainTrainerConfiguration
+        {
+            Level = MarkovChainLevel.Word,
+            Order = order
+        };
+
+        MarkovChainTrainer trainer = new MarkovChainTrainer();
+        var model = trainer.Train(corpus, configuration);
+
+
+
     }
 }
