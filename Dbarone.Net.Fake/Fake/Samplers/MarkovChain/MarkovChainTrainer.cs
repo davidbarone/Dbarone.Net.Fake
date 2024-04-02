@@ -25,6 +25,11 @@ public class MarkovChainTrainer
         Dictionary<string[], int> occurences = new Dictionary<string[], int>(new StringArrayEqualityComparer());
 
         Queue<string> queue = new Queue<string>();  // stores the current state
+
+        // Initialise the matrix with the empty n-gram (this represents before 1st tokens read)
+        matrix.Add(queue.ToArray(), new Dictionary<string, double>());
+        occurences.Add(queue.ToArray(), 0);
+
         using (var sr = new StreamReader(str))
         {
             Dictionary<string, object> state = new Dictionary<string, object>();
@@ -48,27 +53,22 @@ public class MarkovChainTrainer
                     next = configuration.ProcessLine is null ? next : configuration.ProcessLine(next);
                     if (next is not null)
                     {
-                        // For word n-grams, we split tokens on word boundaries and punctuation characters.
-                        var tokenDelimiters = configuration.WordDelimiters;
-                        if (configuration.Level == MarkovChainLevel.Word)
+                        // Separate punctuation from neighbour words.
+                        foreach (var punctuationCharacter in configuration.PunctuationCharacters)
                         {
-                            tokenDelimiters = tokenDelimiters.Union(configuration.PunctuationCharacters).ToArray();
+                            next = next.Replace(punctuationCharacter, $"{configuration.WordDelimiters[0]}{punctuationCharacter}{configuration.WordDelimiters[0]}");
                         }
 
-                        var tokens = next.Split(tokenDelimiters, StringSplitOptions.TrimEntries);
+                        var tokens = next.Split(configuration.WordDelimiters, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
                         foreach (var token in tokens)
                         {
-                            // Make sure the current queue is in the transformation matrix
-                            // Can include n-grams with length < Order (e.g. the first words in the corpus).
-                            var key = queue.ToArray();
-                            if (!matrix.ContainsKey(key) && queue.Count() == configuration.Order)
-                            {
-                                matrix.Add(key, new Dictionary<string, double>());
-                                occurences.Add(key, 0);
-                            }
-                            occurences[key] = occurences[key] + 1;
 
-                            // Add the next token into the matrix if not present
+                            // Add the next token into the matrix for the existing n-gram. The n-gram must exist at this point.
+                            if (!matrix.ContainsKey(queue.ToArray()))
+                            {
+                                throw new Exception("Key does not exist!");
+                            }
+
                             if (!matrix[queue.ToArray()].ContainsKey(token))
                             {
                                 matrix[queue.ToArray()][token] = 0;
@@ -84,6 +84,16 @@ public class MarkovChainTrainer
                                 queue.Dequeue();
                             }
                             queue.Enqueue(token);
+
+                            // Make sure the current queue is in the transformation matrix
+                            // Can include n-grams with length < Order (e.g. the first words in the corpus).
+                            var key = queue.ToArray();
+                            if (!matrix.ContainsKey(key))
+                            {
+                                matrix.Add(key, new Dictionary<string, double>());
+                                occurences.Add(key, 0);
+                            }
+                            occurences[key] = occurences[key] + 1;
                         }
                     }
                 }
@@ -109,7 +119,8 @@ public class MarkovChainTrainer
             {
                 Order = configuration.Order,
                 Level = configuration.Level,
-                Matrix = matrix
+                Matrix = matrix,
+                Occurences = occurences
             };
         }
     }
