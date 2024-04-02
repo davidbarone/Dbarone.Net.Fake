@@ -15,6 +15,46 @@ public class MarkovChainTrainer
         return Train(stream, configuration);
     }
 
+    private void UpdateTransitionMatrix(
+        Dictionary<string[], Dictionary<string, double>> matrix,
+        Dictionary<string[], int> occurences,
+        MarkovChainTrainerConfiguration configuration,
+        Queue<string> queue,
+        string next)
+    {
+        // Add the next token into the matrix for the existing n-gram. The n-gram must exist at this point.
+        if (!matrix.ContainsKey(queue.ToArray()))
+        {
+            throw new Exception("Key does not exist!");
+        }
+
+        if (!matrix[queue.ToArray()].ContainsKey(next))
+        {
+            matrix[queue.ToArray()][next] = 0;
+        }
+
+        // Update the transition matrix
+        matrix[queue.ToArray()][next]++;
+
+        // Check if the queue length equals the n-gram size, dequeue the oldest element:
+        if (queue.Count() == configuration.Order)
+        {
+            // remove the oldest item
+            queue.Dequeue();
+        }
+        queue.Enqueue(next);
+
+        // Make sure the current queue is in the transformation matrix
+        // Can include n-grams with length < Order (e.g. the first words in the corpus).
+        var key = queue.ToArray();
+        if (!matrix.ContainsKey(key))
+        {
+            matrix.Add(key, new Dictionary<string, double>());
+            occurences.Add(key, 0);
+        }
+        occurences[key] = occurences[key] + 1;
+    }
+
     /// <summary>
     /// Creates a transition matrix for a given corpus or training text.
     /// </summary>
@@ -59,41 +99,22 @@ public class MarkovChainTrainer
                             next = next.Replace(punctuationCharacter, $"{configuration.WordDelimiters[0]}{punctuationCharacter}{configuration.WordDelimiters[0]}");
                         }
 
-                        var tokens = next.Split(configuration.WordDelimiters, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        foreach (var token in tokens)
+                        var words = next.Split(configuration.WordDelimiters, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                        foreach (var word in words)
                         {
-
-                            // Add the next token into the matrix for the existing n-gram. The n-gram must exist at this point.
-                            if (!matrix.ContainsKey(queue.ToArray()))
+                            if (configuration.Level == MarkovChainLevel.Character)
                             {
-                                throw new Exception("Key does not exist!");
+                                // reset the queue at the start of each word if level == character.
+                                queue = new Queue<string>();
+                                foreach (var character in word)
+                                {
+                                    UpdateTransitionMatrix(matrix, occurences, configuration, queue, character.ToString());
+                                }
                             }
-
-                            if (!matrix[queue.ToArray()].ContainsKey(token))
+                            else
                             {
-                                matrix[queue.ToArray()][token] = 0;
+                                UpdateTransitionMatrix(matrix, occurences, configuration, queue, word);
                             }
-
-                            // Update the transition matrix
-                            matrix[queue.ToArray()][token]++;
-
-                            // Check if the queue length equals the n-gram size, dequeue the oldest element:
-                            if (queue.Count() == configuration.Order)
-                            {
-                                // remove the oldest item
-                                queue.Dequeue();
-                            }
-                            queue.Enqueue(token);
-
-                            // Make sure the current queue is in the transformation matrix
-                            // Can include n-grams with length < Order (e.g. the first words in the corpus).
-                            var key = queue.ToArray();
-                            if (!matrix.ContainsKey(key))
-                            {
-                                matrix.Add(key, new Dictionary<string, double>());
-                                occurences.Add(key, 0);
-                            }
-                            occurences[key] = occurences[key] + 1;
                         }
                     }
                 }
