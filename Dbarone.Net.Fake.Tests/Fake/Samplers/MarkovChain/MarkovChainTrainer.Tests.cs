@@ -15,6 +15,7 @@ public class MarkovChainTrainerTests
     public void WilliamFakespearTrainer()
     {
         // Project Gutenberg - Complete works of William Shakespeare
+        // We'll process his entire work to create a word-based model.
         string url = "https://www.gutenberg.org/cache/epub/100/pg100.txt";
         string text = "";
 
@@ -23,6 +24,7 @@ public class MarkovChainTrainerTests
 
         MarkovChainTrainer trainer = new MarkovChainTrainer();
 
+        // We need to tell trainer how to handle unwanted parts of the text.
         IncludeLineDelegate includeLine = (string line, int index, ref Dictionary<string, object> state) =>
         {
             int i = 0;
@@ -86,6 +88,7 @@ public class MarkovChainTrainerTests
             }
         };
 
+        // We need to instruct the trainer how to ignore certain content.
         ProcessLineDelegate processLine = (string line) =>
         {
             line = line.Trim();
@@ -104,20 +107,26 @@ public class MarkovChainTrainerTests
         {
             WordDelimiters = new string[] { " " },
             Order = 2,
+            Level = MarkovChainLevel.Word,
             IncludeLine = includeLine,
             ProcessLine = processLine
         };
 
+        // We train the system based on the corpus (entire works of William Shakespear)
         var model = trainer.Train(text, configuration);
 
+        // Create a new sampler using the model created above.
         var markov = new MarkovChainSampler(model);
 
+        // Create first 20 words of a new prose based on what Shakespear would write?!?
         List<string> results = new List<string>();
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 20; i++)
         {
             results.Add(markov.Next(i, null));
         }
         var b = results;
+        var actual = string.Join(" ", results);
+        Assert.Equal("From fairest creatures we desire to know our friends , followers , and her rats are at the invisible event", actual);
     }
 
     [Theory]
