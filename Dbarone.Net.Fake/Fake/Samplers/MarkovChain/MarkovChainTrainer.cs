@@ -5,11 +5,11 @@ namespace Dbarone.Net.Fake;
 /// </summary>
 public class MarkovChainTrainer
 {
-    public MarkovChainModel Train(string str, MarkovChainTrainerConfiguration configuration)
+    public MarkovChainModel Train(string corpus, MarkovChainTrainerConfiguration configuration)
     {
         var stream = new MemoryStream();
         var writer = new StreamWriter(stream);
-        writer.Write(str);
+        writer.Write(corpus);
         writer.Flush();
         stream.Position = 0;
         return Train(stream, configuration);
@@ -59,7 +59,7 @@ public class MarkovChainTrainer
     /// Creates a transition matrix for a given corpus or training text.
     /// </summary>
     /// <returns></returns>
-    public MarkovChainModel Train(Stream str, MarkovChainTrainerConfiguration configuration)
+    public MarkovChainModel Train(Stream stream, MarkovChainTrainerConfiguration configuration)
     {
         Dictionary<string[], Dictionary<string, double>> matrix = new Dictionary<string[], Dictionary<string, double>>(new StringArrayEqualityComparer());
         Dictionary<string[], int> occurences = new Dictionary<string[], int>(new StringArrayEqualityComparer());
@@ -70,7 +70,7 @@ public class MarkovChainTrainer
         matrix.Add(queue.ToArray(), new Dictionary<string, double>());
         occurences.Add(queue.ToArray(), 0);
 
-        using (var sr = new StreamReader(str))
+        using (var sr = new StreamReader(stream))
         {
             Dictionary<string, object> state = new Dictionary<string, object>();
 
@@ -110,6 +110,8 @@ public class MarkovChainTrainer
                                 {
                                     UpdateTransitionMatrix(matrix, occurences, configuration, queue, character.ToString());
                                 }
+                                // Add null / EOF character - need mechanism to 'end' character-based transitions.
+                                UpdateTransitionMatrix(matrix, occurences, configuration, queue, "");
                             }
                             else
                             {

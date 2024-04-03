@@ -33,16 +33,8 @@ public class MarkovChainSampler : ISampler<string>
     /// </summary>
     public IRandom<double> Random { get; set; } = new Lcg();
 
-    public string Next(int i, string? last = null)
+    private string next(double rnd)
     {
-        var rnd = Random.Next();
-
-        // If no current state, create one randomly.
-        if (CurrentState is null)
-        {
-            this.CurrentState = GetStartingState(rnd);
-        }
-
         // Get a random next value using the transition matrix for the current state.
         var dictValues = this.Model.Matrix[this.CurrentState.ToArray()];
         var dictKeys = dictValues.Keys.OrderBy(k => k).ToList();
@@ -60,14 +52,48 @@ public class MarkovChainSampler : ISampler<string>
         }
 
         // Update the current state
-        this.CurrentState.Dequeue();
+        if (this.CurrentState.Count() == this.Model.Order)
+        {
+            this.CurrentState.Dequeue();
+        }
         this.CurrentState.Enqueue(selectedKey);
 
         // Now we have the selected key, return it. 
         return selectedKey;
+
     }
 
-    private Queue<string> GetStartingState(double rnd)
+    public string Next(int i, string? last = null)
+    {
+        var rnd = Random.Next();
+
+        // For character based model, we clear the current state each time
+        // For both character and word based models, we always start from a known point.
+        if (Model.Level == MarkovChainLevel.Character || CurrentState is null)
+        {
+            CurrentState = new Queue<string>();
+        }
+
+        if (Model.Level == MarkovChainLevel.Word)
+        {
+            return next(rnd);
+        }
+        else
+        {
+            // for character-based, keep getting successive characters until we reach an end-of-word ("") character
+            string word = "";
+            string character = "";
+            do
+            {
+                character = next(rnd);
+                word = word + character;
+                rnd = Random.Next();
+            } while (character != "");
+            return word;
+        }
+    }
+
+    private Queue<string> GetRandomStartingState(double rnd)
     {
         // Get a random existing state if non exists
         int i = (int)(rnd * this.Model.Matrix.Keys.Count());

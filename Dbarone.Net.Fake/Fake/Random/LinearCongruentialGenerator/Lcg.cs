@@ -10,7 +10,7 @@ public class Lcg : AbstractRandom<double>
 {
     public Lcg() : base()
     {
-        this.Parameters = LcgParams.Create(LcgParamsEnum.ZX81);
+        this.Parameters = LcgParams.Create(LcgParamsEnum.ANSI_C);
     }
 
     public Lcg(LcgParamsEnum parameters) : base()
@@ -23,7 +23,7 @@ public class Lcg : AbstractRandom<double>
         this.Parameters = LcgParams.Create(parameters);
     }
 
-    public LcgParams Parameters { get; set; } = LcgParams.Create(LcgParamsEnum.ZX81);
+    public LcgParams Parameters { get; set; } = LcgParams.Create(LcgParamsEnum.ANSI_C);
 
     // See: https://en.wikipedia.org/wiki/Linear_congruential_generator
     public override double Next()
