@@ -39,16 +39,16 @@ public class MarkovChainSampler : ISampler<string>
         var dictValues = this.Model.Matrix[this.CurrentState.ToArray()];
         var dictKeys = dictValues.Keys.OrderBy(k => k).ToList();
         double total = 0;
-        string selectedKey = dictKeys.First();
+        string selectedKey = "";
 
         for (int j = 0; j < dictKeys.Count(); j++)
         {
+            selectedKey = dictKeys[j];
             total = total + dictValues[selectedKey];
-            if (rnd > total)
+            if (total > rnd)
             {
                 break;
             }
-            selectedKey = dictKeys[j];
         }
 
         // Update the current state

@@ -58,5 +58,4 @@ public class WeightedListStrategyTests
         var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
         Assert.Equal("SMITH", mostCommonName);
     }
-
 }
