@@ -16,12 +16,13 @@ public class WeightedListStrategyTests
             Dataset.GetData(DatasetEnum.en_GB_Names_Boy)
             .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 1000; i++)
         {
             var name = (string)s.Next(i);
             names.Add(name);
         }
-        var aa = 0;
+        var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
+        Assert.Equal("Oliver", mostCommonName);
     }
 
     [Fact]
@@ -37,7 +38,8 @@ public class WeightedListStrategyTests
             var name = (string)s.Next(i);
             names.Add(name);
         }
-        var aa = 0;
+        var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
+        Assert.Equal("Florence", mostCommonName);
     }
 
     [Fact]
@@ -53,7 +55,8 @@ public class WeightedListStrategyTests
             var name = (string)s.Next(i);
             names.Add(name);
         }
-        var aa = 0;
+        var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
+        Assert.Equal("SMITH", mostCommonName);
     }
 
 }

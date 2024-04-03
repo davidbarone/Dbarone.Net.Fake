@@ -21,6 +21,6 @@ public class WeightedItem<T> : IWeightedItem {
     /// <param name="dictionary"></param>
     public WeightedItem(IDictionary<string, object> data, Func<IDictionary<string, object>, T> mapper) {
         this.Value = mapper(data);
-        this.Weight = (double)data["Weight"];
+        this.Weight = double.Parse((string)data["Weight"]);
     }
 }
