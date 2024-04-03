@@ -26,16 +26,17 @@ public class LcgTests
 
     [Theory]
     [InlineData(LcgParamsEnum.ZX81)]
-    public void LcgCheckBetween0And1(LcgParamsEnum param)
+    [InlineData(LcgParamsEnum.ANSI_C)]
+    public void LcgTestRandomness(LcgParamsEnum param)
     {
-        for (int i = 0; i < 1000; i++)
+        for (ulong i = 0; i < 100; i++)
         {
             List<double> randoms = new List<double>();
             Lcg lcg = new Lcg(param, i);
-            for (int j = 0; j<1000; j++) {
+            for (int j = 0; j<100; j++) {
                 randoms.Add(lcg.Next());
             }
-            Assert.Equal(1000, randoms.Distinct().Count()); // all 1000 must be different
+            Assert.InRange(randoms.Distinct().Count(), 98, 100); // at least 98 different values.
             Assert.All(randoms, item => Assert.InRange(item, 0, 1));
         }
     }

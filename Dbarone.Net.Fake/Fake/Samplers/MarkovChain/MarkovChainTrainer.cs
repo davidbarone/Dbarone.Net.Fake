@@ -36,23 +36,27 @@ public class MarkovChainTrainer
         // Update the transition matrix
         matrix[queue.ToArray()][next]++;
 
-        // Check if the queue length equals the n-gram size, dequeue the oldest element:
-        if (queue.Count() == configuration.Order)
+        // Do NOT add the next item to the matrix if "". This is used as end of word marker when Level = Character.
+        if (next != "")
         {
-            // remove the oldest item
-            queue.Dequeue();
-        }
-        queue.Enqueue(next);
+            // Check if the queue length equals the n-gram size, dequeue the oldest element:
+            if (queue.Count() == configuration.Order)
+            {
+                // remove the oldest item
+                queue.Dequeue();
+            }
+            queue.Enqueue(next);
 
-        // Make sure the current queue is in the transformation matrix
-        // Can include n-grams with length < Order (e.g. the first words in the corpus).
-        var key = queue.ToArray();
-        if (!matrix.ContainsKey(key))
-        {
-            matrix.Add(key, new Dictionary<string, double>());
-            occurences.Add(key, 0);
+            // Make sure the current queue is in the transformation matrix
+            // Can include n-grams with length < Order (e.g. the first words in the corpus).
+            var key = queue.ToArray();
+            if (!matrix.ContainsKey(key))
+            {
+                matrix.Add(key, new Dictionary<string, double>());
+                occurences.Add(key, 0);
+            }
+            occurences[key] = occurences[key] + 1;
         }
-        occurences[key] = occurences[key] + 1;
     }
 
     /// <summary>

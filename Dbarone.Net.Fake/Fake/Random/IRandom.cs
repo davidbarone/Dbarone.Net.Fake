@@ -14,5 +14,5 @@ public interface IRandom<T> {
     /// <summary>
     /// The seed value.
     /// </summary>
-    public long Seed { get; set; }
+    public ulong Seed { get; set; }
 }

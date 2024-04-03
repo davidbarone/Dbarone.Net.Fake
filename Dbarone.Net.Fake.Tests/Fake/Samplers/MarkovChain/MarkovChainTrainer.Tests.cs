@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net.Http;
 using Xunit.Sdk;
 
+namespace Dbarone.Net.Fake.Tests;
+
 public class MarkovChainTrainerTests
 {
     [Fact]

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace Dbarone.Net.Fake;
+namespace Dbarone.Net.Fake.Tests;
 
 public class MarkovChainSamplerTests {
 

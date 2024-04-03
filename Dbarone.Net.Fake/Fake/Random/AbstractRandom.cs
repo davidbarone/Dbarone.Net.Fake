@@ -3,17 +3,17 @@ namespace Dbarone.Net.Fake;
 /// <summary>
 /// Base abstract class for all classes implementing generic IRandom.
 /// </summary>
-/// <typeparam name="T"></typeparam>
+/// <typeparam name="T">The type of random value to return.</typeparam>
 public abstract class AbstractRandom<T> : IRandom<T>
 {
-    public long Seed { get; set; }
+    public ulong Seed { get; set; }
 
     public AbstractRandom()
     {
         this.Seed = 0;
     }
 
-    public AbstractRandom(long seed)
+    public AbstractRandom(ulong seed)
     {
         this.Seed = seed;
     }

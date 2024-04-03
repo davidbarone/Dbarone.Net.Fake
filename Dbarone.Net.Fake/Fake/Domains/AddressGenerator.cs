@@ -4,7 +4,7 @@ public class AddressGenerator
 {
 	public IRandom<double> Random { get; set; } = new Lcg();
 
-	public int Seed { get; set; }
+	public ulong Seed { get; set; }
 
 	public AddressInfo Next()
 	{
