@@ -1,10 +1,129 @@
 using System.Collections.Generic;
 using Xunit;
+using System.Net.Http;
+using System.Linq;
 
 namespace Dbarone.Net.Fake.Tests;
 
 public class MarkovChainSamplerTests
 {
+    [Fact]
+    public void WilliamFakespearSampler()
+    {
+        // Project Gutenberg - Complete works of William Shakespeare
+        // We'll process his entire work to create a word-based model.
+        string url = "https://www.gutenberg.org/cache/epub/100/pg100.txt";
+        string text = "";
+
+        HttpClient httpClient = new HttpClient();
+        text = httpClient.GetStringAsync(url).Result;
+
+        MarkovChainTrainer trainer = new MarkovChainTrainer();
+
+        // We need to tell trainer how to handle unwanted parts of the text.
+        IncludeLineDelegate includeLine = (string line, int index, ref Dictionary<string, object> state) =>
+        {
+            int i = 0;
+            if (index <= 80)
+            {
+                // file header information
+                return false;
+            }
+            else if (line.Trim() == "Contents" || line.Trim() == "THE END")
+            {
+                state["InContents"] = true;
+                return false;
+            }
+            else if (string.IsNullOrEmpty(line.Trim()))
+            {
+                // empty line
+                return false;
+            }
+            else if (line.Trim().Equals(line.Trim().ToUpper()) && line.Reverse().ToList()[0] == '.')
+            {
+                // Named part / speaker
+                return false;
+            }
+            else if (line.Trim().StartsWith('[') && line.Trim().EndsWith(']'))
+            {
+                // Stage direction
+                return false;
+            }
+            else if (line.Trim().StartsWith("Dramatis Personæ"))
+            {
+                state["Dramatis Personæ"] = true;
+                return false;
+            }
+            else if (line.ToUpper().StartsWith("SCENE I.") && state.ContainsKey("Dramatis Personæ") && (bool)state["Dramatis Personæ"] == true && line.Trim().Length > "SCENE I.".Length)
+            {
+                state["Dramatis Personæ"] = false;
+                state["InContents"] = false;
+                return false;
+            }
+            else if (line.ToUpper().StartsWith("SCENE") || line.ToUpper().StartsWith("ACT"))
+            {
+                return false;
+            }
+            else if (int.TryParse(line.Trim(), out i) == true)
+            {
+                // Chapter numbers
+                return false;
+            }
+            else if (state.ContainsKey("InContents") && (bool)state["InContents"] == true)
+            {
+                return false;
+            }
+            else if (line.Equals(line.ToUpper()))
+            {
+                // ignore lines completely in upper case
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        };
+
+        // We need to instruct the trainer how to ignore certain content.
+        ProcessLineDelegate processLine = (string line) =>
+        {
+            line = line.Trim();
+            var start = line.IndexOf("[");
+            var end = line.Reverse().ToList().IndexOf(']');
+            if (start >= 0 && end >= 0)
+            {
+                // remove stage directions from line
+                line = line.Substring(line.Length - end);
+            }
+            return line.Trim();
+
+        };
+
+        var configuration = new MarkovChainTrainerConfiguration
+        {
+            WordDelimiters = new string[] { " " },
+            Order = 2,
+            Level = MarkovChainLevel.Word,
+            IncludeLine = includeLine,
+            ProcessLine = processLine
+        };
+
+        // We train the system based on the corpus (entire works of William Shakespear)
+        var model = trainer.Train(text, configuration);
+
+        // Create a new sampler using the model created above.
+        var markov = new MarkovChainSampler(model);
+
+        // Create first 20 words of a new prose based on what Shakespear would write?!?
+        List<string> results = new List<string>();
+        for (int i = 0; i < 20; i++)
+        {
+            results.Add(markov.Next(i, null));
+        }
+        var b = results;
+        var actual = string.Join(" ", results);
+        Assert.Equal("From fairest creatures we desire to see me down to tame a tongue in your words show you to use", actual);
+    }
 
     [Fact]
     public void LoremIpsumCharacterSampler()
@@ -27,7 +146,7 @@ public class MarkovChainSamplerTests
             words.Add(sampler.Next(i));
         }
         var actual = string.Join(" ", words);
-        Assert.Equal("am commod conseriscinis non am in nost consecte commod", actual); // that looks like real latin!
+        Assert.Equal("Lor ex sincilliquipsunt mod incit ulliquis modolore dolorunt enim", actual); // that looks like real latin!
     }
 
     [Fact]
@@ -50,11 +169,9 @@ public class MarkovChainSamplerTests
             words.Add(sampler.Next(i));
         }
         var actual = string.Join(" ", words);
-        Assert.Equal("Ardringsbridge Windon Westmorlandhead Dymouth Stanmouth Salford Harluke Walton Bucknells Honiton", actual); // 10 town-sounding values.
+        Assert.Equal("Ardudno Chigwellingston Rowlanwells Borden Boot St Augh Ballynder-Edgwall Croydon Aboyne Thorley Kesterick Teigr", actual); // 10 town-sounding values.
 
         // Save the model
         var json = model.Serialise();
-
-
     }
 }

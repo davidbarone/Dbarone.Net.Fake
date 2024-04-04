@@ -36,15 +36,14 @@ public class MarkovChainSampler : ISampler<string>
     private string next(double rnd)
     {
         // Get a random next value using the transition matrix for the current state.
-        var dictValues = this.Model.Matrix[this.CurrentState.ToArray()];
-        var dictKeys = dictValues.Keys.OrderBy(k => k).ToList();
+        var currentState = this.Model.Matrix.Rows.First(r=>r.CurrentState.SequenceEqual(this.CurrentState.ToArray()));
         double total = 0;
         string selectedKey = "";
 
-        for (int j = 0; j < dictKeys.Count(); j++)
+        foreach (var element in currentState.NextElements)
         {
-            selectedKey = dictKeys[j];
-            total = total + dictValues[selectedKey];
+            selectedKey = element.Value;
+            total = total + element.Probability;
             if (total > rnd)
             {
                 break;
@@ -60,7 +59,6 @@ public class MarkovChainSampler : ISampler<string>
 
         // Now we have the selected key, return it. 
         return selectedKey;
-
     }
 
     public string Next(int i, string? last = null)
@@ -91,13 +89,5 @@ public class MarkovChainSampler : ISampler<string>
             } while (character != "");
             return word;
         }
-    }
-
-    private Queue<string> GetRandomStartingState(double rnd)
-    {
-        // Get a random existing state if non exists
-        int i = (int)(rnd * this.Model.Matrix.Keys.Count());
-        var values = this.Model.Matrix.Keys.OrderBy(k => k, new StringArrayComparer()).ToList()[i];
-        return new Queue<string>(values);
     }
 }

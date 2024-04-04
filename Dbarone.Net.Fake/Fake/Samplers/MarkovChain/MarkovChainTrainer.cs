@@ -16,25 +16,29 @@ public class MarkovChainTrainer
     }
 
     private void UpdateTransitionMatrix(
-        Dictionary<string[], Dictionary<string, double>> matrix,
-        Dictionary<string[], int> occurences,
+        StochasticMatrix matrix,
         MarkovChainTrainerConfiguration configuration,
         Queue<string> queue,
         string next)
     {
         // Add the next token into the matrix for the existing n-gram. The n-gram must exist at this point.
-        if (!matrix.ContainsKey(queue.ToArray()))
+        if (!matrix.Exists(queue.ToArray()))
         {
-            throw new Exception("Key does not exist!");
+            throw new Exception("Current state does not exist!");
         }
 
-        if (!matrix[queue.ToArray()].ContainsKey(next))
+        var row = matrix.GetRow(queue.ToArray());
+        var nextElement = row.NextElements.FirstOrDefault(e => e.Value.Equals(next));
+        if (nextElement == null)
         {
-            matrix[queue.ToArray()][next] = 0;
+            nextElement = new StochasticMatrixElement
+            {
+                Value = next
+            };
+            row.NextElements.Add(nextElement);
         }
 
-        // Update the transition matrix
-        matrix[queue.ToArray()][next]++;
+        nextElement.Occurences++;
 
         // Do NOT add the next item to the matrix if "". This is used as end of word marker when Level = Character.
         if (next != "")
@@ -49,13 +53,17 @@ public class MarkovChainTrainer
 
             // Make sure the current queue is in the transformation matrix
             // Can include n-grams with length < Order (e.g. the first words in the corpus).
-            var key = queue.ToArray();
-            if (!matrix.ContainsKey(key))
+            row = matrix.GetRowOrDefault(queue.ToArray());
+            if (row == null)
             {
-                matrix.Add(key, new Dictionary<string, double>());
-                occurences.Add(key, 0);
+                row = new StochasticMatrixRow
+                {
+                    CurrentState = queue.ToArray(),
+                    Occurences = 0
+                };
+                matrix.AddRow(row);
             }
-            occurences[key] = occurences[key] + 1;
+            row.Occurences++;
         }
     }
 
@@ -65,17 +73,15 @@ public class MarkovChainTrainer
     /// <returns></returns>
     public MarkovChainModel Train(Stream stream, MarkovChainTrainerConfiguration configuration)
     {
-        Dictionary<string[], Dictionary<string, double>> matrix = new Dictionary<string[], Dictionary<string, double>>(new StringArrayEqualityComparer());
-        Dictionary<string[], int> occurences = new Dictionary<string[], int>(new StringArrayEqualityComparer());
-
+        StochasticMatrix matrix = new StochasticMatrix();
         Queue<string> queue = new Queue<string>();  // stores the current state
 
         // Initialise the matrix with the empty n-gram (this represents before 1st tokens read)
-        matrix.Add(queue.ToArray(), new Dictionary<string, double>());
-        occurences.Add(queue.ToArray(), 0);
+        matrix.AddRow(new StochasticMatrixRow { CurrentState = queue.ToArray() });
 
         using (var sr = new StreamReader(stream))
         {
+            // Used as general state bag when calling IncludeLine callback.
             Dictionary<string, object> state = new Dictionary<string, object>();
 
             var line = 0;
@@ -112,14 +118,14 @@ public class MarkovChainTrainer
                                 queue = new Queue<string>();
                                 foreach (var character in word)
                                 {
-                                    UpdateTransitionMatrix(matrix, occurences, configuration, queue, character.ToString());
+                                    UpdateTransitionMatrix(matrix, configuration, queue, character.ToString());
                                 }
                                 // Add null / EOF character - need mechanism to 'end' character-based transitions.
-                                UpdateTransitionMatrix(matrix, occurences, configuration, queue, "");
+                                UpdateTransitionMatrix(matrix, configuration, queue, "");
                             }
                             else
                             {
-                                UpdateTransitionMatrix(matrix, occurences, configuration, queue, word);
+                                UpdateTransitionMatrix(matrix, configuration, queue, word);
                             }
                         }
                     }
@@ -128,26 +134,32 @@ public class MarkovChainTrainer
             }
 
             // Next we convert counts to probability between 0 and 1
-            foreach (var key1 in matrix.Keys)
+            int total = 0;
+            foreach (var row in matrix.Rows)
             {
-                double total = 0;
-                foreach (var key2 in matrix[key1].Keys)
+                total = total + row.Occurences;
+                int rowTotal = 0;
+                foreach (var element in row.NextElements)
                 {
-                    total = total + (double)matrix[key1][key2];
+                    rowTotal = rowTotal + element.Occurences;
                 }
-                // Now we rewrite values between 0 and 1
-                foreach (var key2 in matrix[key1].Keys)
+                // Now write element probabilities
+                foreach (var element in row.NextElements)
                 {
-                    matrix[key1][key2] = matrix[key1][key2] / total;
+                    element.Probability = (double)element.Occurences / rowTotal;
                 }
+            }
+            // Now write row probabilities
+            foreach (var row in matrix.Rows)
+            {
+                row.Probability = (double)row.Occurences / total;
             }
 
             return new MarkovChainModel
             {
                 Order = configuration.Order,
                 Level = configuration.Level,
-                Matrix = matrix,
-                Occurences = occurences
+                Matrix = matrix
             };
         }
     }
