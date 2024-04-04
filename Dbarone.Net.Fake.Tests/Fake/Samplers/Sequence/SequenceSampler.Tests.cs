@@ -18,7 +18,7 @@ public class SequenceSamplerTests
 
         for (int i = 0; i < 1000; i++)
         {
-            s = (int)ss.Next(i, s);
+            s = (int)ss.Next();
             ints.Add(s.Value);
         }
 
@@ -38,7 +38,7 @@ public class SequenceSamplerTests
 
         for (int i = 0; i < 1000000; i++)
         {
-            s = (int)ss.Next(i, s);
+            s = (int)ss.Next();
             ints.Add(s.Value);
         }
 

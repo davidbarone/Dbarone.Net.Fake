@@ -7,10 +7,18 @@ namespace Dbarone.Net.Fake;
 public class BoxMullerTransform : AbstractRandom<double>
 {
     public BoxMullerTransform() : base() { }
+
+    public BoxMullerTransform(IRandom<double> random, double mean, double stdDev) : base() {
+        this.Mean = mean;
+        this.StdDev = stdDev;
+        this.Random = random;
+    }
+
     public BoxMullerTransform(IRandom<double> random, double mean, double stdDev, ulong seed) : base(seed) {
         this.Mean = mean;
         this.StdDev = stdDev;
         this.Random = random;
+        this.Random.Seed = seed;
     }
 
     public double Mean { get; set; }

@@ -61,7 +61,7 @@ public class MarkovChainSampler : ISampler<string>
         return selectedKey;
     }
 
-    public string Next(int i, string? last = null)
+    public string Next()
     {
         var rnd = Random.Next();
 

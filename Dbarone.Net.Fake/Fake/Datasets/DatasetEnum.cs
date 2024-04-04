@@ -37,5 +37,15 @@ public enum DatasetEnum
     /// Street types / suffixes. Based on http://data.gov.uk/dataset/os-locator (https://greem.co.uk/os/os_locator_streets.txt). Data as at 2010.
     /// names under 10 hits excluded.
     /// </summary>
-    en_GB_Street_Names_Types,
+    en_GB_Street_Types,
+
+    /// <summary>
+    /// Stochastic model that can be used to generate word that sound like UK post towns.
+    /// </summary>
+    Stochastic_Model_Town,
+
+    /// <summary>
+    /// Stochastic model that can be used to generate words that sound like latin words (based on Lorem Ipsum corpus).
+    /// </summary>
+    Stochastic_Model_Lorem_Ipsum
 }

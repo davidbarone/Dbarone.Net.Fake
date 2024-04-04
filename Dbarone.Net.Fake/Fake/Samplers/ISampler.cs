@@ -12,10 +12,8 @@ public interface ISampler<T>
     IRandom<double> Random { get; set; }
 
     /// <summary>
-    /// The next value to return
+    /// The next value to return.
     /// </summary>
-    /// <param name="i"></param>
-    /// <param name="last"></param>
-    /// <returns></returns>
-    T Next(int i, T? last = default!);
+    /// <returns>A value of type T.</returns>
+    T Next();
 }

@@ -16,7 +16,8 @@ public static class Dataset
     {
         var datasetStr = dataset.ToString();
         var assembly = typeof(Dataset).GetTypeInfo().Assembly;
-        var path = $"{assembly.GetName().Name}.Datasets.{datasetStr}.csv";
+        var resources = GetResources(); 
+        var path = resources.First(r => r.Contains(datasetStr));
         Stream resource = assembly.GetManifestResourceStream(path)!;
 
         CsvConfiguration configuration = new CsvConfiguration
@@ -27,5 +28,21 @@ public static class Dataset
         CsvReader csv = new CsvReader(resource, configuration);
         var data = csv.Read();
         return data;
+    }
+
+    public static string GetString(DatasetEnum dataset)
+    {
+        var datasetStr = dataset.ToString();
+        var assembly = typeof(Dataset).GetTypeInfo().Assembly;
+        var path = GetResources().First(r => r.Contains(datasetStr));
+        Stream resource = assembly.GetManifestResourceStream(path)!;
+        StreamReader sr = new StreamReader(resource);
+        return sr.ReadToEnd();
+    }
+
+    public static string[] GetResources()
+    {
+        var assembly = typeof(Dataset).GetTypeInfo().Assembly;
+        return assembly.GetManifestResourceNames();
     }
 }

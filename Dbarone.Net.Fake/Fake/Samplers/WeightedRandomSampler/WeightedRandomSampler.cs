@@ -34,16 +34,16 @@ public class WeightedRandomSampler<T> : ISampler<T>
         Func<IDictionary<string, object>, WeightedItem<T>> mapper) : this(data.Select(d => mapper(d)), random) { }
 
 
-    public T Next(int i, T? last = default)
+    public T Next()
     {
         // Get random number 0 <= x < TotalWeight
         var rand = this.Random.Next() * this.TotalWeight;
         var total = 0;
         T? value = default;
-        for (int j = 0; j < this.data!.Count(); j++)
+        for (int i = 0; i < this.data!.Count(); i++)
         {
-            value = this.data![j].Value;
-            total += (int)this.data![j].Weight;
+            value = this.data![i].Value;
+            total += (int)this.data![i].Weight;
             if (total > rand)
             {
                 break;

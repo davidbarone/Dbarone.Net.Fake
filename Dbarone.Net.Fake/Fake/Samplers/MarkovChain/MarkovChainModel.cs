@@ -28,7 +28,8 @@ public class MarkovChainModel
     /// Serialiases the current model to json string.
     /// </summary>
     /// <returns>The model serialiased as a json string.</returns>
-    public string Serialise() {
+    public string Serialise()
+    {
         return JsonSerializer.Serialize(this);
     }
 
@@ -37,7 +38,8 @@ public class MarkovChainModel
     /// </summary>
     /// <param name="json">The json string.</param>
     /// <returns>Returns a MarkovChainModel instance.</returns>
-    public MarkovChainModel Deserialise(string json) {
+    public static MarkovChainModel Deserialise(string json)
+    {
         return JsonSerializer.Deserialize<MarkovChainModel>(json);
-    } 
+    }
 }

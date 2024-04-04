@@ -18,7 +18,7 @@ public class WeightedListStrategyTests
 
         for (int i = 0; i < 1000; i++)
         {
-            var name = (string)s.Next(i);
+            var name = (string)s.Next();
             names.Add(name);
         }
         var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
@@ -35,7 +35,7 @@ public class WeightedListStrategyTests
 
         for (int i = 0; i < 100; i++)
         {
-            var name = (string)s.Next(i);
+            var name = (string)s.Next();
             names.Add(name);
         }
         var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
@@ -52,7 +52,7 @@ public class WeightedListStrategyTests
 
         for (int i = 0; i < 10; i++)
         {
-            var name = (string)s.Next(i);
+            var name = (string)s.Next();
             names.Add(name);
         }
         var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;

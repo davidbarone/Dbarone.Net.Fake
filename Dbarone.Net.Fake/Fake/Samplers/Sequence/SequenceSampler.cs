@@ -20,13 +20,15 @@ public class SequenceSampler
     /// </summary>
     public IRandom<double> Random { get; set; } = new Lcg();
 
-    public object Next(int i, object? last = null)
+    private int? Last { get; set; } = null;
+
+    public object Next()
     {
-        int n = last == null ? Start : (int)last + 1;
+        Last = (Last == null) ? Start : Last + 1;
         while (Random.Next() * SkipFactor >= 1)
         {
-            n++;
+            Last++;
         }
-        return n;
+        return Last;
     }
 }
