@@ -42,7 +42,7 @@ public class MarkovChainSampler : ISampler<string>
 
         foreach (var element in currentState.NextElements)
         {
-            selectedKey = element.Value;
+            selectedKey = element.NextState;
             total = total + element.Probability;
             if (total > rnd)
             {

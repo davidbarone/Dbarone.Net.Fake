@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Dbarone.Net.Fake;
 
 /// <summary>
@@ -6,8 +8,16 @@ namespace Dbarone.Net.Fake;
 /// The sum of the probabilities of the next values equals 1.
 /// </summary>
 public class StochasticMatrixRow {
+    
+    [JsonPropertyName("s")]
     public string[] CurrentState { get; set; } = default!;
+    
+    [JsonPropertyName("c")]
     public int Occurences { get; set; }
+
+    [JsonPropertyName("p")]
     public double Probability { get; set; }
+    
+    [JsonPropertyName("n")]
     public List<StochasticMatrixElement> NextElements { get; set; } = new List<StochasticMatrixElement>();
 }

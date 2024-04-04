@@ -28,12 +28,12 @@ public class MarkovChainTrainer
         }
 
         var row = matrix.GetRow(queue.ToArray());
-        var nextElement = row.NextElements.FirstOrDefault(e => e.Value.Equals(next));
+        var nextElement = row.NextElements.FirstOrDefault(e => e.NextState.Equals(next));
         if (nextElement == null)
         {
             nextElement = new StochasticMatrixElement
             {
-                Value = next
+                NextState = next
             };
             row.NextElements.Add(nextElement);
         }
@@ -76,8 +76,8 @@ public class MarkovChainTrainer
         StochasticMatrix matrix = new StochasticMatrix();
         Queue<string> queue = new Queue<string>();  // stores the current state
 
-        // Initialise the matrix with the empty n-gram (this represents before 1st tokens read)
-        matrix.AddRow(new StochasticMatrixRow { CurrentState = queue.ToArray() });
+        // Initialise the matrix with the empty n-gram (this represents the beginning of text, before 1st token is read)
+        matrix.AddRow(new StochasticMatrixRow { CurrentState = queue.ToArray(), Occurences = 1 });
 
         using (var sr = new StreamReader(stream))
         {
