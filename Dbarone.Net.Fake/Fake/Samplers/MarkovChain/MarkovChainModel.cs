@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Dbarone.Net.Fake;
 
 /// <summary>
@@ -26,4 +28,26 @@ public class MarkovChainModel
     /// The transition matrix. Defines the current states, and the next possible states with the corresponding frequency expressed as a value between 0 and 1.
     /// </summary>
     public Dictionary<string[], Dictionary<string, double>> Matrix = new Dictionary<string[], Dictionary<string, double>>(new StringArrayEqualityComparer());
+
+    /// <summary>
+    /// Serialiases the current model to json string.
+    /// </summary>
+    /// <returns>The model serialiased as a json string.</returns>
+    public string Serialise() {
+        var ms = new MemoryStream();
+        var ser = new System.Xml.Serialization.XmlSerializer(typeof(MarkovChainModel));
+        ser.Serialize(ms, this);
+        var sr = new StreamReader(ms);
+        return sr.ReadToEnd();
+        //return JsonSerializer.Serialize(this);
+    }
+
+    /// <summary>
+    /// Creates a new MarkovChainModel from a json string.
+    /// </summary>
+    /// <param name="json">The json string.</param>
+    /// <returns>Returns a MarkovChainModel instance.</returns>
+    public MarkovChainModel Deserialise(string json) {
+        return JsonSerializer.Deserialize<MarkovChainModel>(json);
+    } 
 }
