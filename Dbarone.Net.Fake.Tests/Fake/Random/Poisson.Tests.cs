@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace Dbarone.Net.Fake.Tests;
 
-public class PoissonKnuthRandomTests
+public class PoissonTests
 {
 
     [Fact]
-    public void TestPoissonknuthRandom()
+    public void TestPoissonRandom()
     {
         int expectedRate = 10;
         int sampleSize = 10000;
-        PoissonKnuthRandom rand = new PoissonKnuthRandom(expectedRate);
+        PoissonRandom rand = new PoissonRandom(expectedRate);
 
         List<int> numbers = new List<int>();
         for (int i = 0; i < sampleSize; i++)
@@ -31,6 +32,23 @@ public class PoissonKnuthRandomTests
             var pctVar = Math.Abs(variance / calculatedProbability);
             Assert.True(pctVar < 0.10 || calculatedProbability < 0.01); // Allow 10% tolerance. Ignore events with low probability
         }
+    }
+
+    [Fact]
+    public void TestExponentialRandom() {
+        double expectedRate = 1f/10;    // i.e. 1 event every 10 units of time.
+        int sampleSize = 100000;
+        ExponentialRandom rand = new ExponentialRandom(expectedRate);
+
+        List<double> numbers = new List<double>();
+        for (int i = 0; i < sampleSize; i++)
+        {
+            numbers.Add(rand.Next());
+        }
+
+        // The number generated should have mean of 10;
+        var mean = numbers.Sum() / numbers.Count();
+        Assert.InRange(mean, 9.9, 10.1);
     }
 
     private int Factorial(int number)
