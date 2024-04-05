@@ -26,9 +26,13 @@ public class EventSampler<T, U> : ISampler<T> where T : IEvent
     public T Next()
     {
         // Get a new value for Lambda based on PreviousDate
-        this.Random = new ExponentialRandom(OnLambda(this.PreviousDate));
+        var rnd = this.Random as ExponentialRandom;
+        rnd!.Lambda = OnLambda(this.PreviousDate);
+
+        // Move ahead a random amount of time.
         this.PreviousDate = PreviousDate.AddDays(this.Random.Next());
-        
+
+        // Construct + return event data.        
         var data = OnEvent(Context, this.PreviousDate);
         return data;
     }

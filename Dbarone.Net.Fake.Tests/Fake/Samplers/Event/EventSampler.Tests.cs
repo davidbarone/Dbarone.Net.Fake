@@ -23,7 +23,7 @@ public class EventSamplerTests
         items.Add(new WeightedItem<string>("Bar", 700));
         items.Add(new WeightedItem<string>("Baz", 200));
 
-        Func<DateTime, double> onLambda = (d) => 1;  // 10 events per day for all time
+        Func<DateTime, double> onLambda = (d) => 10;  // 10 events per day for all time
 
         WeightedRandomSampler<string> wrs = new WeightedRandomSampler<string>(items);
         Func<WeightedRandomSampler<string>, DateTime, TestEvent> onEvent = (wrs, dateTime) => new TestEvent { EventDateTime = dateTime, Value = wrs.Next() };
