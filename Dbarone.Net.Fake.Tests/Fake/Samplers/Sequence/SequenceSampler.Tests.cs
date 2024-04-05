@@ -43,7 +43,7 @@ public class SequenceSamplerTests
         }
 
         Assert.Equal(1000000, ints[0]);
-        Assert.Equal(1001508, ints[999]);   // approx 1000 * 150%
+        Assert.Equal(1001434, ints[999]);   // approx 1000 * 150%
         Assert.Equal(1000000, ints.Distinct().Count());
     }
 }

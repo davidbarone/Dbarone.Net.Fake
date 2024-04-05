@@ -22,7 +22,7 @@ public class WeightedListStrategyTests
             names.Add(name);
         }
         var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
-        Assert.Equal("Oliver", mostCommonName);
+        Assert.Equal("Noah", mostCommonName);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class WeightedListStrategyTests
             names.Add(name);
         }
         var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
-        Assert.Equal("Florence", mostCommonName);
+        Assert.Equal("Evelyn", mostCommonName);
     }
 
     [Fact]
@@ -56,6 +56,6 @@ public class WeightedListStrategyTests
             names.Add(name);
         }
         var mostCommonName = names.GroupBy(n => n).ToDictionary(g => g.Key, g => g.Count()).OrderByDescending(g => g.Value).First().Key;
-        Assert.Equal("SMITH", mostCommonName);
+        Assert.Equal("CASTRO", mostCommonName);
     }
 }

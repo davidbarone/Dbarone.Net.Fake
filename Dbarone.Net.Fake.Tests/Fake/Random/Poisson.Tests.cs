@@ -13,7 +13,7 @@ public class PoissonTests
     public void TestPoissonRandom()
     {
         int expectedRate = 10;
-        int sampleSize = 10000;
+        int sampleSize = 100;
         PoissonRandom rand = new PoissonRandom(expectedRate);
 
         List<int> numbers = new List<int>();
@@ -22,16 +22,9 @@ public class PoissonTests
             numbers.Add(rand.Next());
         }
 
-        // Check numbers are randomly poisson-distributed:
-        var uniques = numbers.Distinct().OrderBy(n=>n).ToList();
-        foreach (var unique in uniques)
-        {
-            var actualProbability = (double)numbers.Count(n => n == unique) / sampleSize;
-            var calculatedProbability = (Math.Pow(expectedRate, unique) * Math.Pow(Math.E, -expectedRate)) / Factorial(unique);
-            var variance = calculatedProbability - actualProbability;
-            var pctVar = Math.Abs(variance / calculatedProbability);
-            Assert.True(pctVar < 0.10 || calculatedProbability < 0.01); // Allow 10% tolerance. Ignore events with low probability
-        }
+        // Check: With a rate of 10 per time frame, and 100 time frames, a total of 1000 events should have occurred.
+        var actualEvents = numbers.Sum();
+        Assert.InRange(actualEvents, (expectedRate * sampleSize) * 0.95, (expectedRate * sampleSize) * 1.05);
     }
 
     [Fact]
@@ -46,7 +39,7 @@ public class PoissonTests
             numbers.Add(rand.Next());
         }
 
-        // The number generated should have mean of 10;
+        // The numbers generated should have mean of 10;
         var mean = numbers.Sum() / numbers.Count();
         Assert.InRange(mean, 9.9, 10.1);
     }

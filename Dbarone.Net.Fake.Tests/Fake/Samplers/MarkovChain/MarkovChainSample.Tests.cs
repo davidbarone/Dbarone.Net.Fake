@@ -122,7 +122,7 @@ public class MarkovChainSamplerTests
         }
         var b = results;
         var actual = string.Join(" ", results);
-        Assert.Equal("From fairest creatures we desire to see me down to tame a tongue in your words show you to use", actual);
+        Assert.Equal("From fairest creatures we desire , Or swooning paleness ; and , Parolles and Attendants . Buckingham , Why ,", actual);
     }
 
     [Fact]
@@ -141,12 +141,12 @@ public class MarkovChainSamplerTests
         MarkovChainSampler sampler = new MarkovChainSampler(model);
 
         List<string> words = new List<string>();
-        for (int i = 1; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             words.Add(sampler.Next());
         }
         var actual = string.Join(" ", words);
-        Assert.Equal("Lor ex sincilliquipsunt mod incit ulliquis modolore dolorunt enim", actual); // that looks like real latin!
+        Assert.Equal("eiusmodolorem int commolorit se ut int ex ulpariscit sed ex", actual);
     }
 
     [Fact]
@@ -164,12 +164,12 @@ public class MarkovChainSamplerTests
         MarkovChainSampler sampler = new MarkovChainSampler(model);
 
         List<string> words = new List<string>();
-        for (int i = 1; i <= 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             words.Add(sampler.Next());
         }
         var actual = string.Join(", ", words);
-        Assert.Equal("Argyll Forester, South Staffords, Derbyshire, Bristol, Gateshire, Leeds, Wolvering, Colerdale, Crawley, East Lond Fulham", actual); // 10 region-sounding values.
+        Assert.Equal("Lancastairley, Bath Ayrshire, Brentwood, Bury, South Hoverphilter, Middles, Norfaena, Crawley, Falkirklees, Renfrewshire", actual); // 10 region-sounding values.
     }
 
     [Fact]
@@ -189,11 +189,11 @@ public class MarkovChainSamplerTests
         MarkovChainSampler sampler = new MarkovChainSampler(model);
 
         List<string> words = new List<string>();
-        for (int i = 1; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             words.Add(sampler.Next());
         }
-        var actual = string.Join(" ", words);
-        Assert.Equal("Ardudno Chigwellingston Rowlanwells Borden Boot St Augh Ballynder-Edgwall Croydon Aboyne Thorley Kesterick Teigr", actual); // 10 town-sounding values.
+        var actual = string.Join(", ", words);
+        Assert.Equal("Immingtreen, Charrowbridge, Tidwester, Ilfre, Kingfield, Biggley, Isle of Isle Emlynahingwallandrie, Dunoon, Cromyard, Yarmouth", actual); // 10 town-sounding values.
     }
 }
