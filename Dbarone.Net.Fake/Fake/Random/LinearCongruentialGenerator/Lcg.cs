@@ -8,12 +8,17 @@ namespace Dbarone.Net.Fake;
 /// </summary>
 public class Lcg : AbstractRandom<double>
 {
-    public Lcg() : base()
+    public Lcg(ulong seed) : base(seed)
     {
         this.Parameters = LcgParams.Create(LcgParamsEnum.ANSI_C);
     }
 
-    public Lcg(LcgParamsEnum parameters) : base()
+    public Lcg() : base(ulong.MaxValue / 2)
+    {
+        this.Parameters = LcgParams.Create(LcgParamsEnum.ANSI_C);
+    }
+
+    public Lcg(LcgParamsEnum parameters) : base(ulong.MaxValue / 2)
     {
         this.Parameters = LcgParams.Create(parameters);
     }
