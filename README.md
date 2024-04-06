@@ -9,17 +9,16 @@ There are a few goals of this project:
 
 
 
-Bathroom
-Textiles
-Beds & Wardrobes
-Bookcases
-Bowls & Vases
-Wall Decorations, Pictures & Frames, Clocks
-Childrens Products
-Office Furniture
-Fabrics & Curtains
-Garden Furniture
-Kitchen Accessories
-Lighting
-Rugs
-Sofas, Chairs, Dining Tables
+Beds & Wardrobes, 10
+Bookcases, 10
+Sofas, Chairs, Dining Tables, 10
+Garden Furniture, 20
+Bathroom, 50
+Textiles, 50
+Fabrics & Curtains, 50
+Rugs, 50
+Childrens Products, 100
+Bowls & Vases, 100
+Lighting, 100
+Wall Decorations, Pictures & Frames, Clocks, 100
+Kitchen Accessories, 200

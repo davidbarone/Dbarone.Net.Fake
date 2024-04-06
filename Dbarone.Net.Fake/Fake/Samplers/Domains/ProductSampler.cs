@@ -9,13 +9,9 @@ public class ProductSampler : ISampler<ProductInfo>
 
     public ProductSampler()
     {
-        WeightedRandomSampler<string> departments = new WeightedRandomSampler<string>(
-            new WeightedItem<string>()
-        )
 
     }
 
-    public ProductSampler(IRandom random)
     public ProductInfo Next()
     {
         throw new NotImplementedException();
