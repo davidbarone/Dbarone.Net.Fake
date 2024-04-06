@@ -21,9 +21,9 @@ public class AddressInfo
     public string Town { get; set; }
     
     /// <summary>
-    /// The former postal country. No longer required in address but included for historical context.
+    /// The Region.
     /// </summary>
-    public string County { get; set; }
+    public string Region { get; set; }
 
     /// <summary>
     /// The postcode.

@@ -14,12 +14,15 @@ public class WeightedRandomSampler<T> : ISampler<T>
 
     public IRandom<double> Random { get; set; }
 
-    public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data)
-    {
-        this.Random = new Lcg();
-        this.data = data.ToList();
-        this.TotalWeight = this.data.Sum(d => d.Weight);
-    }
+    public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data) : this(data.ToList(), new Lcg()) { }
+
+    public WeightedRandomSampler(params WeightedItem<T>[] data) : this(data.ToList(), new Lcg()) { }
+    public WeightedRandomSampler(IRandom<double> random, params WeightedItem<T>[] data) : this(data.ToList(), random) { }
+
+    public WeightedRandomSampler(
+        IEnumerable<IDictionary<string, object>> data,
+        IRandom<double> random,
+        Func<IDictionary<string, object>, WeightedItem<T>> mapper) : this(data.Select(d => mapper(d)), random) { }
 
     public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data, IRandom<double> random)
     {
@@ -28,10 +31,6 @@ public class WeightedRandomSampler<T> : ISampler<T>
         this.TotalWeight = this.data.Sum(d => d.Weight);
     }
 
-    public WeightedRandomSampler(
-        IEnumerable<IDictionary<string, object>> data,
-        IRandom<double> random,
-        Func<IDictionary<string, object>, WeightedItem<T>> mapper) : this(data.Select(d => mapper(d)), random) { }
 
 
     public T Next()

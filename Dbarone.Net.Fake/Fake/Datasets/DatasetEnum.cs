@@ -40,9 +40,14 @@ public enum DatasetEnum
     en_GB_Street_Types,
 
     /// <summary>
-    /// Stochastic model that can be used to generate word that sound like UK post towns.
+    /// Stochastic model that can be used to generate words that sound like UK post towns.
     /// </summary>
     Stochastic_Model_Town,
+
+    /// <summary>
+    /// Stochastic model that can be used to generate words that sound like UK regions.
+    /// </summary>
+    Stochastic_Model_Region,
 
     /// <summary>
     /// Stochastic model that can be used to generate words that sound like latin words (based on Lorem Ipsum corpus).

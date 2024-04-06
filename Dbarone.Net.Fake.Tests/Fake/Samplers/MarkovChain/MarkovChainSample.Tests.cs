@@ -170,6 +170,8 @@ public class MarkovChainSamplerTests
         }
         var actual = string.Join(", ", words);
         Assert.Equal("Lancastairley, Bath Ayrshire, Brentwood, Bury, South Hoverphilter, Middles, Norfaena, Crawley, Falkirklees, Renfrewshire", actual); // 10 region-sounding values.
+
+        var json = model.Serialise();
     }
 
     [Fact]

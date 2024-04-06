@@ -12,6 +12,5 @@ public class AddressSamplerTests {
         for (int i=0; i<50; i++){
             addresses.Add(sampler.Next());
         }
-        var a = 123;
     }
 }
