@@ -52,5 +52,10 @@ public enum DatasetEnum
     /// <summary>
     /// Stochastic model that can be used to generate words that sound like latin words (based on Lorem Ipsum corpus).
     /// </summary>
-    Stochastic_Model_Lorem_Ipsum
+    Stochastic_Model_Lorem_Ipsum,
+
+    /// <summary>
+    /// A collection of Scandanavian words for places, names, animals etc. Can be used to generate product names for homewares shop.
+    /// </summary>
+    Scandanavian_Words
 }

@@ -198,4 +198,31 @@ public class MarkovChainSamplerTests
         var actual = string.Join(", ", words);
         Assert.Equal("Immingtreen, Charrowbridge, Tidwester, Ilfre, Kingfield, Biggley, Isle of Isle Emlynahingwallandrie, Dunoon, Cromyard, Yarmouth", actual); // 10 town-sounding values.
     }
+
+    [Fact]
+    public void TestScandanavianWords() {
+        var data = Dataset.GetData(DatasetEnum.Scandanavian_Words).Select(w=>(string)w["Word"]).ToList();
+        var corpus = string.Join("|", data);
+
+        MarkovChainTrainer trainer = new MarkovChainTrainer();
+        MarkovChainTrainerConfiguration configuration = new MarkovChainTrainerConfiguration
+        {
+            Order = 3,
+            WordDelimiters = new string[] { "|" },
+            Level = MarkovChainLevel.Character
+        };
+        var model = trainer.Train(corpus, configuration);
+        MarkovChainSampler sampler = new MarkovChainSampler(model);
+        UniqueSampler<string> uniqueSampler = new UniqueSampler<string>(sampler);
+
+        List<string> words = new List<string>();
+        for (int i = 0; i < 10; i++)
+        {
+            words.Add(uniqueSampler.Next());
+        }
+        var actual = string.Join(", ", words);
+        Assert.Equal("Milton, Harsundda, Inez, Vilmar, Marstadsvin, Mysen, Gräsk, Marsund, Stellen, Bonnin", actual); // 10 town-sounding values.
+
+
+    }
 }
