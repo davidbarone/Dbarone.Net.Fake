@@ -9,7 +9,7 @@ public interface ISampler<T>
     /// <summary>
     /// The random number generator to use in the sampler.
     /// </summary>
-    IRandom<double> Random { get; set; }
+    IRandom<double> Random { get; init; }
 
     /// <summary>
     /// The next value to return.

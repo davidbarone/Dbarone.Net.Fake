@@ -49,9 +49,7 @@ public class AddressSampler : ISampler<AddressInfo>
 		);
 	}
 
-	public IRandom<double> Random { get; set; } = new Lcg();
-
-	public ulong Seed { get; set; }
+	public IRandom<double> Random { get; init; } = new Lcg();
 
 	public AddressInfo Next()
 	{

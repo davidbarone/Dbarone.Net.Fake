@@ -6,33 +6,41 @@ namespace Dbarone.Net.Fake;
 /// <summary>
 /// Returns data based on a weighted list of values.
 /// </summary>
-public class WeightedRandomSampler<T> : ISampler<T>
+public class WeightedRandomSampler<T> : AbstractSampler<T>, ISampler<T>
 {
+    #region Fields
     private IList<WeightedItem<T>>? data = null;
 
     public double TotalWeight { get; set; }
 
-    public IRandom<double> Random { get; set; }
+    #endregion
 
-    public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data) : this(data.ToList(), new Lcg()) { }
-
-    public WeightedRandomSampler(params WeightedItem<T>[] data) : this(data.ToList(), new Lcg()) { }
-    public WeightedRandomSampler(IRandom<double> random, params WeightedItem<T>[] data) : this(data.ToList(), random) { }
+    #region Ctor
 
     public WeightedRandomSampler(
         IEnumerable<IDictionary<string, object>> data,
         IRandom<double> random,
         Func<IDictionary<string, object>, WeightedItem<T>> mapper) : this(data.Select(d => mapper(d)), random) { }
 
-    public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data, IRandom<double> random)
+    public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data, IRandom<double> random) : base(random)
     {
-        this.Random = random;
         this.data = data.ToList();
         this.TotalWeight = this.data.Sum(d => d.Weight);
     }
 
+    public WeightedRandomSampler(IEnumerable<WeightedItem<T>> data) : base()
+    {
+        this.data = data.ToList();
+        this.TotalWeight = this.data.Sum(d => d.Weight);
+    }
 
+    public WeightedRandomSampler(params WeightedItem<T>[] data) : this(data.ToList()) { }
 
+    public WeightedRandomSampler(IRandom<double> random, params WeightedItem<T>[] data) : this(data.ToList(), random) { }
+
+    #endregion
+
+    #region Methods   
     public T Next()
     {
         // Get random number 0 <= x < TotalWeight
@@ -50,4 +58,6 @@ public class WeightedRandomSampler<T> : ISampler<T>
         }
         return value;
     }
+
+    #endregion
 }

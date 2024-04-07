@@ -3,8 +3,10 @@ using Dbarone.Net.Fake;
 /// <summary>
 /// Generates random people.
 /// </summary>
-public class PersonSampler : ISampler<PersonInfo>
+public class PersonSampler : AbstractSampler<PersonInfo>, ISampler<PersonInfo>
 {
+    #region Properties
+
     SequenceSampler personIdSampler;
     WeightedRandomSampler<char> sexSampler { get; set; }
     BoxMullerTransform ageSampler { get; set; }
@@ -14,12 +16,44 @@ public class PersonSampler : ISampler<PersonInfo>
     double MinAge { get; set; }
     double MaxAge { get; set; }
 
-    public PersonSampler() : this(1, 1, 50, 10, 18, 90) { }
+    #endregion
 
-    public PersonSampler(double maleWeight = 1, double femaleWeight = 1, double averageAge = 50, double stdDevAge = 10, double minAge = 18, double MaxAge = 90)
+    #region Ctor
+
+    public PersonSampler() : base()
     {
         // PersonId sampler
-        personIdSampler = new SequenceSampler(1.1);
+        personIdSampler = new SequenceSampler(1, 1.1);
+
+        // Sex sampler
+        sexSampler = new WeightedRandomSampler<char>(
+            new WeightedItem<char>('M', 1),
+            new WeightedItem<char>('F', 1)
+        );
+
+        // Age sampler
+        ageSampler = new BoxMullerTransform(new Lcg(), 50, 10);
+
+        // Girls name sample
+        girlNameSampler = new WeightedRandomSampler<string>(
+            Dataset.GetData(DatasetEnum.en_GB_Names_Girl)
+            .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
+
+        // Boys name sample
+        boyNameSampler = new WeightedRandomSampler<string>(
+            Dataset.GetData(DatasetEnum.en_GB_Names_Boy)
+            .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
+
+        // Surname sample
+        surnameSampler = new WeightedRandomSampler<string>(
+            Dataset.GetData(DatasetEnum.Surnames_US_Census_2010)
+            .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
+    }
+
+    public PersonSampler(IRandom<double> random, double maleWeight = 1, double femaleWeight = 1, double averageAge = 50, double stdDevAge = 10, double minAge = 18, double MaxAge = 90) : base(random)
+    {
+        // PersonId sampler
+        personIdSampler = new SequenceSampler(1, 1.1);
 
         // Sex sampler
         sexSampler = new WeightedRandomSampler<char>(
@@ -44,10 +78,11 @@ public class PersonSampler : ISampler<PersonInfo>
         surnameSampler = new WeightedRandomSampler<string>(
             Dataset.GetData(DatasetEnum.Surnames_US_Census_2010)
             .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
-
     }
 
-    public IRandom<double> Random { get; set; }
+    #endregion
+
+    #region Methods
 
     public PersonInfo Next()
     {
@@ -68,4 +103,6 @@ public class PersonSampler : ISampler<PersonInfo>
             DoB = DateTime.Now.AddDays(age * daysInYear * -1).Date
         };
     }
+
+    #endregion
 }

@@ -10,7 +10,7 @@ public class EventSampler<T, U> : ISampler<T> where T : IEvent
     public DateTime StartDate { get; set; }
     public Func<DateTime, double> OnLambda { get; set; }
     public U Context { get; set; }
-    public IRandom<double> Random { get; set; }
+    public IRandom<double> Random { get; init; }
     public Func<U, DateTime, T> OnEvent { get; set; }
 
     public EventSampler(DateTime startDate, Func<DateTime, double> onLambda, U context, Func<U, DateTime, T> onEvent)

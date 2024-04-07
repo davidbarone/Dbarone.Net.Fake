@@ -4,39 +4,46 @@ using Dbarone.Net.Fake;
 /// <summary>
 /// Markov chain text sampler class. Generates pseudo-random text based on a model known as a transition matrix.
 /// </summary>
-public class MarkovChainSampler : ISampler<string>
+public class MarkovChainSampler : AbstractSampler<string>, ISampler<string>
 {
-    private MarkovChainModel Model { get; init; }
+    #region Properties
 
-    /// <summary>
-    /// Default ctor.
-    /// </summary>
-    public MarkovChainSampler(MarkovChainModel model) : this(model, new Lcg()) { }
+    private MarkovChainModel Model { get; init; }
 
     /// <summary>
     /// Stores the current state.
     /// </summary>
     private Queue<string>? CurrentState = null;
 
+    #endregion
+
+    #region Ctor
+
     /// <summary>
-    /// Ctor with specified random number generator.
+    /// Default ctor.
     /// </summary>
-    /// <param name="random"></param>
-    public MarkovChainSampler(MarkovChainModel model, IRandom<double> random)
+    public MarkovChainSampler(MarkovChainModel model) : base()
     {
-        this.Random = random;
         this.Model = model;
     }
 
     /// <summary>
-    /// The random number generator used.
+    /// Ctor with specified random number generator.
     /// </summary>
-    public IRandom<double> Random { get; set; } = new Lcg();
+    /// <param name="random"></param>
+    public MarkovChainSampler(MarkovChainModel model, IRandom<double> random) : base(random)
+    {
+        this.Model = model;
+    }
+
+    #endregion
+
+    #region Methods
 
     private string next(double rnd)
     {
         // Get a random next value using the transition matrix for the current state.
-        var currentState = this.Model.Matrix.Rows.First(r=>r.CurrentState.SequenceEqual(this.CurrentState.ToArray()));
+        var currentState = this.Model.Matrix.Rows.First(r => r.CurrentState.SequenceEqual(this.CurrentState.ToArray()));
         double total = 0;
         string selectedKey = "";
 
@@ -90,4 +97,6 @@ public class MarkovChainSampler : ISampler<string>
             return word;
         }
     }
+
+    #endregion
 }

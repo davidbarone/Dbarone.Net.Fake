@@ -1,35 +1,37 @@
-public class AddressInfo
+using Dbarone.Net.Fake;
+
+public class AddressInfo : InfoObject
 {
     /// <summary>
     /// Organisational department, sub building name,  Apartment / unit / flat number.
     /// </summary>
-    public string AddressLine1 { get; set; }
+    public string AddressLine1 { get; set; } = default!;
 
     /// <summary>
     /// The building number and street name.
     /// </summary>
-    public string AddressLine2 { get; set; }
+    public string AddressLine2 { get; set; } = default!;
 
     /// <summary>
     /// Optional locality to disinguish multiple similar streets in town.
     /// </summary>
-    public string Locality { get; set; }
-    
+    public string Locality { get; set; } = default!;
+
     /// <summary>
     /// The postal town / city.
     /// </summary>
-    public string Town { get; set; }
-    
+    public string Town { get; set; } = default!;
+
     /// <summary>
     /// The Region.
     /// </summary>
-    public string Region { get; set; }
+    public string Region { get; set; } = default!;
 
     /// <summary>
     /// The postcode.
     /// </summary>
-    public string Postcode { get; set; }
-    
+    public string Postcode { get; set; } = default!;
+
     /// <summary>
     /// The country.
     /// </summary>
