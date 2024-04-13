@@ -13,11 +13,6 @@ public class AddressInfo : InfoObject
     public string AddressLine2 { get; set; } = default!;
 
     /// <summary>
-    /// Optional locality to disinguish multiple similar streets in town.
-    /// </summary>
-    public string Locality { get; set; } = default!;
-
-    /// <summary>
     /// The postal town / city.
     /// </summary>
     public string Town { get; set; } = default!;
