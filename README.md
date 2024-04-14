@@ -10,8 +10,31 @@ There are a few goals of this project:
 
 
 Beds & Wardrobes, 10
+- Bed
+- Mattress
+- Mattress Base
+- Bed Slats
+- Bedside Table
+- Headboard
+- Underbed Storage
+- Bed Legs
+- Bedding
 Bookcases, 10
+- Bookcase
+- Shelving Unit
 Sofas, Chairs, Dining Tables, 10
+- Sofa
+- Couch
+- Dining Table
+- Dining Chairs
+- Table
+- Desk
+- Sideboard
+- Buffet
+- Armchair
+- Trolley
+- Bar Furniture
+- Nursery Furniture
 Garden Furniture, 20
 Bathroom, 50
 Textiles, 50
@@ -20,5 +43,10 @@ Rugs, 50
 Childrens Products, 100
 Bowls & Vases, 100
 Lighting, 100
+- Lamp
+- Decorative Lighting
+- Smart Lighting
+- Outdoor Lighting
+- Bathroom Lighting
 Wall Decorations, Pictures & Frames, Clocks, 100
 Kitchen Accessories, 200
