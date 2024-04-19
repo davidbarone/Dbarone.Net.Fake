@@ -36,6 +36,9 @@ Sofas, Chairs, Dining Tables, 10
 - Bar Furniture
 - Nursery Furniture
 Garden Furniture, 20
+- Garden table
+- Garden chair
+- 
 Bathroom, 50
 Textiles, 50
 Fabrics & Curtains, 50
