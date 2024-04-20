@@ -70,7 +70,9 @@ public class MarkovChainTrainer
     /// <summary>
     /// Creates a transition matrix for a given corpus or training text.
     /// </summary>
-    /// <returns></returns>
+    /// <param name="stream">The stream containing the corpus.</param>
+    /// <param name="configuration">The configuration settings.</param>
+    /// <returns>A trained model.</returns>
     public MarkovChainModel Train(Stream stream, MarkovChainTrainerConfiguration configuration)
     {
         StochasticMatrix matrix = new StochasticMatrix();

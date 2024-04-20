@@ -6,14 +6,30 @@ namespace Dbarone.Net.Fake;
 /// </summary>
 public class BoxMullerTransform : AbstractRandom<double>
 {
+    /// <summary>
+    /// Creates a new BoxMullerTransform object.
+    /// </summary>
     public BoxMullerTransform() : base() { }
 
+    /// <summary>
+    /// Creates a new BoxMullerTransform object.
+    /// </summary>
+    /// <param name="random">A random number generator.</param>
+    /// <param name="mean">The mean value of the distribution.</param>
+    /// <param name="stdDev">The standard deviation of the distribution.</param>
     public BoxMullerTransform(IRandom<double> random, double mean, double stdDev) : base() {
         this.Mean = mean;
         this.StdDev = stdDev;
         this.Random = random;
     }
 
+    /// <summary>
+    /// Creates a new BoxMullerTransform object.
+    /// </summary>
+    /// <param name="random">A random number generator.</param>
+    /// <param name="mean">The mean value of the distribution.</param>
+    /// <param name="stdDev">The standard deviation of the distribution.</param>
+    /// <param name="seed">An initial seed value for the random number generator.</param>
     public BoxMullerTransform(IRandom<double> random, double mean, double stdDev, ulong seed) : base(seed) {
         this.Mean = mean;
         this.StdDev = stdDev;
@@ -21,10 +37,25 @@ public class BoxMullerTransform : AbstractRandom<double>
         this.Random.Seed = seed;
     }
 
+    /// <summary>
+    /// The mean of the distribution.
+    /// </summary>
     public double Mean { get; set; }
+ 
+    /// <summary>
+    /// The standard deviation of the distribution.
+    /// </summary>
     public double StdDev { get; set; }
+    
+    /// <summary>
+    /// The random number generator.
+    /// </summary>
     public IRandom<double> Random { get; set; } = new Lcg();
 
+    /// <summary>
+    /// Gets the next value.
+    /// </summary>
+    /// <returns>Returns a value which is normally distributed around the mean value provided.</returns>
     public override double Next()
     {
         const double two_pi = 2.0 * Math.PI;

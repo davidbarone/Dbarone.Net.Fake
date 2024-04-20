@@ -49,8 +49,16 @@ public class LcgParams
     /// </summary>
     public ulong C { get; set; }
 
+    /// <summary>
+    /// The output mask used to return the final result.
+    /// </summary>
     public ulong OutputMask { get; set; }
 
+    /// <summary>
+    /// Creates a new LcgParams instance based on a type enum.
+    /// </summary>
+    /// <param name="type">The type enum to select the LcgParams to use.</param>
+    /// <returns>Returns an LcgParams instance.</returns>
     public static LcgParams Create(LcgParamsEnum type)
     {
         return parameters[type];
