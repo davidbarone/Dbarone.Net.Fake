@@ -1,21 +1,10 @@
 namespace Dbarone.Net.Fake;
 
 /// <summary>
-/// A fake product.
+/// A fake product type - used to generate fake products.
 /// </summary>
-public class ProductInfo
+public class ProductTypeInfo
 {
-
-    /// <summary>
-    /// Stock keeping unit.
-    /// </summary>
-    public int Sku { get; set; }
-
-    /// <summary>
-    /// The name of the product.
-    /// </summary>
-    public string ProductName { get; set; } = default!;
-
     /// <summary>
     /// The department that the product is sold from.
     /// </summary>
@@ -39,17 +28,12 @@ public class ProductInfo
     /// <summary>
     /// The mean price for the product type.
     /// </summary>
-    public double Price { get; set; }
+    public decimal Price { get; set; }
 
     /// <summary>
     /// The mean margin for the product type.
     /// </summary>
     public double Margin { get; set; }
-
-    /// <summary>
-    /// The standard cost of the product.
-    /// </summary>
-    public double Cost { get; set; }
 
     /// <summary>
     /// The standard deviation of the product type, expressed as a fraction of the price.
@@ -59,24 +43,23 @@ public class ProductInfo
     /// <summary>
     /// A comma-separated list of Material values for the product type.
     /// </summary>
-    public string Material { get; set; }
+    public string Materials { get; set; }
 
     /// <summary>
     /// A comma-separated list of color values for the product type.
     /// </summary>
-    public string Color { get; set; }
+    public string Colors { get; set; }
 
-
-    public ProductInfo(IDictionary<string, object> data)
+    public ProductTypeInfo(IDictionary<string, object> data)
     {
         this.Department = (string)data["Department"];
         this.Description = (string)data["Description"];
         this.Weight = double.Parse((string)data["Weight"]);
         this.Popularity = double.Parse((string)data["Popularity"]);
-        this.Price = double.Parse((string)data["Price"]);
+        this.Price = decimal.Parse((string)data["Price"]);
         this.Variance = double.Parse((string)data["Variance"]);
         this.Margin = double.Parse((string)data["Margin"]);
-        this.Material = (string)data["Material"];
-        this.Color = (string)data["Color"];
+        this.Materials = (string)data["Materials"];
+        this.Colors = (string)data["Colors"];
     }
 }

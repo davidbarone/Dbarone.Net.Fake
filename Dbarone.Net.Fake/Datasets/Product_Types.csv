@@ -1,4 +1,4 @@
-﻿Department,Description,Weight,Popularity,Price,Variance,Material,Color,Margin
+﻿Department,Description,Weight,Popularity,Price,Variance,Materials,Colors,Margin
 Beds and Wardrobes,Bed,5,1,1000,0.1,"Wood,Metal","Natural,White,Black",0.25
 Beds and Wardrobes,Mattress,2,1,500,0.1,Fibres,White,0.25
 Beds and Wardrobes,Mattress Base,3,1,500,0.1,"Wood,Metal","Natural,White,Black",0.25
