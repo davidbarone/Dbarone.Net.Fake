@@ -221,7 +221,7 @@ public class MarkovChainSamplerTests
             words.Add(uniqueSampler.Next());
         }
         var actual = string.Join(", ", words);
-        Assert.Equal("Milton, Harsundda, Inez, Vilmar, Marstadsvin, Mysen, Gräsk, Marsund, Stellen, Bonnin", actual); // 10 town-sounding values.
+        Assert.Equal("Milton, Harsundda, Inez, Vilmar, Marstadsvin, Mysen, Gräsk, Marsund, Stellen, Bonnin", actual); // 10 Scandanavian sounding words.
 
 
     }

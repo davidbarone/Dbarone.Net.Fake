@@ -57,5 +57,10 @@ public enum DatasetEnum
     /// <summary>
     /// A collection of Scandanavian words for places, names, animals etc. Can be used to generate product names for homewares shop.
     /// </summary>
-    Scandanavian_Words
+    Scandanavian_Words,
+
+    /// <summary>
+    /// Metadata for product types, that can be used to generate actual products for a fake homewares store.
+    /// </summary>
+    Product_Types
 }

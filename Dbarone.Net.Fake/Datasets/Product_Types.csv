@@ -1,71 +1,71 @@
-﻿Department,Description,Weight,Frequency,Price,Variance Factor,Materials,Colors,Margin
-Beds and Wardrobes,Bed,5,1,1000,0.5,"Wood,Metal","Natural,White,Black",0.25
-Beds and Wardrobes,Mattress,2,1,500,0.5,Fibres,White,0.25
-Beds and Wardrobes,Mattress Base,3,1,500,0.5,"Wood,Metal","Natural,White,Black",0.25
-Beds and Wardrobes,Bed Slats,2,1,200,0.5,Wood,Natural,0.25
-Beds and Wardrobes,Bedside Table,2,1,200,0.5,Wood,"Natural,White,Black",0.25
-Beds and Wardrobes,Headboard,2,1,100,0.5,Wood,"Natural,White,Black",0.25
-Beds and Wardrobes,Underbed Storage,2,1,200,0.5,Wood,"Natural,White,Black",0.25
-Beds and Wardrobes,Bed Legs,2,1,100,0.5,"Wood,Metal","Natural,White,Black",0.25
-Beds and Wardrobes,Bedding,2,1,100,0.5,Fibres,White,0.25
-Bookcases,Bookcase,10,5,200,0.5,"Wood,Metal","Natural,White,Black",0.25
-Bookcases,Shelving Unit,2,5,50,0.5,"Wood,Metal","Natural,White,Black",0.25
-"Sofas, Chairs, Dining Tables",Sofa,5,1,1000,0.5,Fibres,"Brown,Blue",0.25
-"Sofas, Chairs, Dining Tables",Couch,5,1,1000,0.5,Fibres,"Brown,Blue",0.25
-"Sofas, Chairs, Dining Tables",Dining Table,5,1,800,0.5,Wood,"Natural,White",0.25
-"Sofas, Chairs, Dining Tables",Dining Chair,5,1,200,0.5,Wood,"Natural,White",0.25
-"Sofas, Chairs, Dining Tables",Table,5,4,600,0.5,Wood,"Natural,White",0.25
-"Sofas, Chairs, Dining Tables",Desk,5,1,300,0.5,"Wood,Metal","Natural,White,Black",0.25
-"Sofas, Chairs, Dining Tables",Sideboard,2,1,400,0.5,Wood,"Natural,White,Black",0.25
-"Sofas, Chairs, Dining Tables",Buffet,1,1,500,0.5,Wood,"Natural,White,Black",0.25
-"Sofas, Chairs, Dining Tables",Armchair,2,2,300,0.5,Wood,"Natural,White,Black",0.25
-"Sofas, Chairs, Dining Tables",Trolley,2,1,200,0.5,"Wood,Metal","Natural,White,Black",0.25
-"Sofas, Chairs, Dining Tables",Bar Furniture,2,1,200,0.5,"Wood,Metal","Natural,White,Black",0.25
-"Sofas, Chairs, Dining Tables",Nursery Furniture,2,1,300,0.5,Wood,"Natural,White,Black",0.25
-Garden Furniture,Garden Table,10,2,500,0.5,"Wood,Metal,Plastic","White,Green,Natural",0.25
-Garden Furniture,Garden Chair,10,2,50,0.5,"Wood,Metal,Plastic","White,Green,Natural",0.25
-Bathroom,Bathroom Accessory,10,1,50,0.5,Plastic,White,0.25
-Bathroom,Bathroom Vanity,3,1,100,0.5,"Plastic,Glass",White,0.25
-Bathroom,Shower Unit,3,1,200,0.5,Plastic,White,0.25
-Bathroom,Bathroom Furniture,5,2,300,0.5,Wood,White,0.25
-Bathroom,Bathroom Mirror,5,2,100,0.5,Glass,White,0.25
-Bathroom,Laundry Basket,3,1,50,0.5,Wood,Natural,0.25
-"Textiles, Fabrics, Rugs",Bedding,5,,100,0.5,Fibres,"White,Yellow,Blue",0.25
-"Textiles, Fabrics, Rugs",Cushion / Cusion Cover,5,5,20,0.5,Fibres,"White,Yellow,Blue",0.25
-"Textiles, Fabrics, Rugs",Curtain / Blind,5,5,100,0.5,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
-"Textiles, Fabrics, Rugs",Rug,5,5,100,0.5,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
-"Textiles, Fabrics, Rugs",Bath Textiles,5,5,50,0.5,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
-"Textiles, Fabrics, Rugs",Chair Pads,1,5,20,0.5,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
-"Textiles, Fabrics, Rugs",Blanket,5,5,100,0.5,Fibres,White,0.25
-"Textiles, Fabrics, Rugs",Table Linen,5,5,50,0.5,Fibres,White,0.25
-"Textiles, Fabrics, Rugs",Children's Textile,5,5,50,0.5,Fibres,White,0.25
-"Textiles, Fabrics, Rugs",Fabrics,5,5,50,0.5,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
-"Textiles, Fabrics, Rugs",Clothing,10,5,100,0.5,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
-"Textiles, Fabrics, Rugs",Kitchen Textiles,5,5,50,0.5,Fibres,White,0.25
-"Textiles, Fabrics, Rugs",Baby Textiles,2,1,50,0.5,Fibres,White,0.25
-Childrens Products,Children's Storage,3,5,200,0.5,Wood,Natural,0.25
-Childrens Products,Children's Bed,3,1,400,0.5,"Wood,Metal",Natural,0.25
-Childrens Products,Toy,10,5,25,0.5,"Plastic,Wood","White,Yellow,Red,Blue,Green,Black",0.25
-Childrens Products,Children's Furniture,4,2,100,0.5,Wood,"White,Yellow,Red,Blue,Green,Black",0.25
-Childrens Products,Children's Lighting,4,3,50,0.5,Glass,White,0.25
-Childrens Products,Nursery Furniture,4,3,200,0.5,Wood,"White,Yellow,Red,Blue,Green,Black",0.25
-Bowls & Vases,Bowl,10,5,25,0.5,Ceramic,"White,Yellow,Red,Blue,Green,Black",0.25
-Bowls & Vases,Vase,10,5,25,0.5,Ceramic,"White,Yellow,Red,Blue,Green,Black",0.25
-Lighting,Lamp,10,5,25,0.5,Glass,White,0.25
-Lighting,Decorative Lighting,5,2,50,0.5,Glass,White,0.25
-Lighting,Outdoor Lighting,5,2,100,0.5,Glass,White,0.25
-Lighting,Bulb,10,5,10,0.5,Glass,White,0.25
-Lighting,Ceiling Lighting,2,2,100,0.5,Glass,White,0.25
-Lighting,Lighting Accessory,10,2,25,0.5,Glass,White,0.25
-"Wall Decorations, Pictures, Frames, Clocks",Wall Decoration,5,10,50,0.5,"Wood,Metal,Glass","White,Yellow,Red,Blue,Green,Black",0.25
-"Wall Decorations, Pictures, Frames, Clocks",Picture,10,10,50,0.5,Paper,"White,Yellow,Red,Blue,Green,Black",0.25
-"Wall Decorations, Pictures, Frames, Clocks",Picture Frame,10,10,50,0.5,"Wood,Metal,Glass","White,Natural,Black",0.25
-"Wall Decorations, Pictures, Frames, Clocks",Clock,10,10,50,0.5,"Plastic,Wood,Metal","White,Natural,Black",0.25
-Kitchen Accessories,Kitchen Storage,3,2,200,0.5,Wood,"White,Natural,Black",0.25
-Kitchen Accessories,Pantry,2,1,200,0.5,Wood,"White,Natural,Black",0.25
-Kitchen Accessories,Kitchen Trolley,1,1,200,0.5,"Wood,Metal","White,Natural",0.25
-Kitchen Accessories,Kitchen Benchtop,1,1,1000,0.5,Wood,"White,Natural",0.25
-Kitchen Accessories,Kitchen Wall Storage,3,1,200,0.5,Wood,"White,Natural",0.25
-Kitchen Accessories,Kitchen Appliance,2,1,1000,0.5,Metal,"White,Silver",0.25
-Kitchen Accessories,Kitchen Tap / Sink,4,1,100,0.5,Metal,Silver,0.25
-Kitchen Accessories,Cookware,10,10,100,0.5,Metal,Silver,0.25
+﻿Department,Description,Weight,Popularity,Price,Variance,Material,Color,Margin
+Beds and Wardrobes,Bed,5,1,1000,0.1,"Wood,Metal","Natural,White,Black",0.25
+Beds and Wardrobes,Mattress,2,1,500,0.1,Fibres,White,0.25
+Beds and Wardrobes,Mattress Base,3,1,500,0.1,"Wood,Metal","Natural,White,Black",0.25
+Beds and Wardrobes,Bed Slats,2,1,200,0.1,Wood,Natural,0.25
+Beds and Wardrobes,Bedside Table,2,1,200,0.1,Wood,"Natural,White,Black",0.25
+Beds and Wardrobes,Headboard,2,1,100,0.1,Wood,"Natural,White,Black",0.25
+Beds and Wardrobes,Underbed Storage,2,1,200,0.1,Wood,"Natural,White,Black",0.25
+Beds and Wardrobes,Bed Legs,2,1,100,0.1,"Wood,Metal","Natural,White,Black",0.25
+Beds and Wardrobes,Bedding,2,1,100,0.1,Fibres,White,0.25
+Bookcases,Bookcase,10,5,200,0.1,"Wood,Metal","Natural,White,Black",0.25
+Bookcases,Shelving Unit,2,5,50,0.1,"Wood,Metal","Natural,White,Black",0.25
+"Sofas, Chairs, Dining Tables",Sofa,5,1,1000,0.1,Fibres,"Brown,Blue",0.25
+"Sofas, Chairs, Dining Tables",Couch,5,1,1000,0.1,Fibres,"Brown,Blue",0.25
+"Sofas, Chairs, Dining Tables",Dining Table,5,1,800,0.1,Wood,"Natural,White",0.25
+"Sofas, Chairs, Dining Tables",Dining Chair,5,1,200,0.1,Wood,"Natural,White",0.25
+"Sofas, Chairs, Dining Tables",Table,5,4,600,0.1,Wood,"Natural,White",0.25
+"Sofas, Chairs, Dining Tables",Desk,5,1,300,0.1,"Wood,Metal","Natural,White,Black",0.25
+"Sofas, Chairs, Dining Tables",Sideboard,2,1,400,0.1,Wood,"Natural,White,Black",0.25
+"Sofas, Chairs, Dining Tables",Buffet,1,1,500,0.1,Wood,"Natural,White,Black",0.25
+"Sofas, Chairs, Dining Tables",Armchair,2,2,300,0.1,Wood,"Natural,White,Black",0.25
+"Sofas, Chairs, Dining Tables",Trolley,2,1,200,0.1,"Wood,Metal","Natural,White,Black",0.25
+"Sofas, Chairs, Dining Tables",Bar Furniture,2,1,200,0.1,"Wood,Metal","Natural,White,Black",0.25
+"Sofas, Chairs, Dining Tables",Nursery Furniture,2,1,300,0.1,Wood,"Natural,White,Black",0.25
+Garden Furniture,Garden Table,10,2,500,0.1,"Wood,Metal,Plastic","White,Green,Natural",0.25
+Garden Furniture,Garden Chair,10,2,50,0.1,"Wood,Metal,Plastic","White,Green,Natural",0.25
+Bathroom,Bathroom Accessory,10,1,50,0.1,Plastic,White,0.25
+Bathroom,Bathroom Vanity,3,1,100,0.1,"Plastic,Glass",White,0.25
+Bathroom,Shower Unit,3,1,200,0.1,Plastic,White,0.25
+Bathroom,Bathroom Furniture,5,2,300,0.1,Wood,White,0.25
+Bathroom,Bathroom Mirror,5,2,100,0.1,Glass,White,0.25
+Bathroom,Laundry Basket,3,1,50,0.1,Wood,Natural,0.25
+"Textiles, Fabrics, Rugs",Bedding,5,1,100,0.1,Fibres,"White,Yellow,Blue",0.25
+"Textiles, Fabrics, Rugs",Cushion / Cusion Cover,5,5,20,0.1,Fibres,"White,Yellow,Blue",0.25
+"Textiles, Fabrics, Rugs",Curtain / Blind,5,5,100,0.1,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
+"Textiles, Fabrics, Rugs",Rug,5,5,100,0.1,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
+"Textiles, Fabrics, Rugs",Bath Textiles,5,5,50,0.1,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
+"Textiles, Fabrics, Rugs",Chair Pads,1,5,20,0.1,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
+"Textiles, Fabrics, Rugs",Blanket,5,5,100,0.1,Fibres,White,0.25
+"Textiles, Fabrics, Rugs",Table Linen,5,5,50,0.1,Fibres,White,0.25
+"Textiles, Fabrics, Rugs",Children's Textile,5,5,50,0.1,Fibres,White,0.25
+"Textiles, Fabrics, Rugs",Fabrics,5,5,50,0.1,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
+"Textiles, Fabrics, Rugs",Clothing,10,5,100,0.1,Fibres,"White,Yellow,Red,Blue,Green,Black",0.25
+"Textiles, Fabrics, Rugs",Kitchen Textiles,5,5,50,0.1,Fibres,White,0.25
+"Textiles, Fabrics, Rugs",Baby Textiles,2,1,50,0.1,Fibres,White,0.25
+Childrens Products,Children's Storage,3,5,200,0.1,Wood,Natural,0.25
+Childrens Products,Children's Bed,3,1,400,0.1,"Wood,Metal",Natural,0.25
+Childrens Products,Toy,10,5,25,0.1,"Wood,Plastic","White,Yellow,Red,Blue,Green,Black",0.25
+Childrens Products,Children's Furniture,4,2,100,0.1,Wood,"White,Yellow,Red,Blue,Green,Black",0.25
+Childrens Products,Children's Lighting,4,3,50,0.1,Glass,White,0.25
+Childrens Products,Nursery Furniture,4,3,200,0.1,Wood,"White,Yellow,Red,Blue,Green,Black",0.25
+Bowls & Vases,Bowl,10,5,25,0.1,Ceramic,"White,Yellow,Red,Blue,Green,Black",0.25
+Bowls & Vases,Vase,10,5,25,0.1,Ceramic,"White,Yellow,Red,Blue,Green,Black",0.25
+Lighting,Lamp,10,5,25,0.1,Glass,White,0.25
+Lighting,Decorative Lighting,5,2,50,0.1,Glass,White,0.25
+Lighting,Outdoor Lighting,5,2,100,0.1,Glass,White,0.25
+Lighting,Bulb,10,5,10,0.1,Glass,White,0.25
+Lighting,Ceiling Lighting,2,2,100,0.1,Glass,White,0.25
+Lighting,Lighting Accessory,10,2,25,0.1,Glass,White,0.25
+"Wall Decorations, Pictures, Frames, Clocks",Wall Decoration,5,10,50,0.1,"Wood,Metal,Glass","White,Yellow,Red,Blue,Green,Black",0.25
+"Wall Decorations, Pictures, Frames, Clocks",Picture,10,10,50,0.1,Paper,"White,Yellow,Red,Blue,Green,Black",0.25
+"Wall Decorations, Pictures, Frames, Clocks",Picture Frame,10,10,50,0.1,"Wood,Metal,Glass","White,Natural,Black",0.25
+"Wall Decorations, Pictures, Frames, Clocks",Clock,10,10,50,0.1,"Wood,Metal,Plastic","White,Natural,Black",0.25
+Kitchen Accessories,Kitchen Storage,3,2,200,0.1,Wood,"White,Natural,Black",0.25
+Kitchen Accessories,Pantry,2,1,200,0.1,Wood,"White,Natural,Black",0.25
+Kitchen Accessories,Kitchen Trolley,1,1,200,0.1,"Wood,Metal","White,Natural",0.25
+Kitchen Accessories,Kitchen Benchtop,1,1,1000,0.1,Wood,"White,Natural",0.25
+Kitchen Accessories,Kitchen Wall Storage,3,1,200,0.1,Wood,"White,Natural",0.25
+Kitchen Accessories,Kitchen Appliance,2,1,1000,0.1,Metal,"White,Silver",0.25
+Kitchen Accessories,Kitchen Tap / Sink,4,1,100,0.1,Metal,Silver,0.25
+Kitchen Accessories,Cookware,10,10,100,0.1,Metal,Silver,0.25
