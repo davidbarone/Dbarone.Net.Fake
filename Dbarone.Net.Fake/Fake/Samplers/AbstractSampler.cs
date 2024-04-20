@@ -15,7 +15,7 @@ public abstract class AbstractSampler<T> : ISampler<T>
 
     public IRandom<double> Random { get; init; }
 
-    public T Next()
+    public virtual T Next()
     {
         throw new NotImplementedException();
     }

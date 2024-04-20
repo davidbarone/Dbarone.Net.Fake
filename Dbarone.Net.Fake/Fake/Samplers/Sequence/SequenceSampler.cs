@@ -42,7 +42,7 @@ public class SequenceSampler : AbstractSampler<int>, ISampler<int>
 
     #region Methods
 
-    public int Next()
+    public override int Next()
     {
         Previous = (Previous == null) ? Start : Previous + 1;
         while (Random.Next() * SkipFactor >= 1)

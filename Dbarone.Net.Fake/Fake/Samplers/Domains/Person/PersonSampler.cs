@@ -48,6 +48,9 @@ public class PersonSampler : AbstractSampler<PersonInfo>, ISampler<PersonInfo>
         surnameSampler = new WeightedRandomSampler<string>(
             Dataset.GetData(DatasetEnum.Surnames_US_Census_2010)
             .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
+
+        MinAge = 10;
+        MaxAge = 90;
     }
 
     public PersonSampler(IRandom<double> random, double maleWeight = 1, double femaleWeight = 1, double averageAge = 50, double stdDevAge = 10, double minAge = 18, double MaxAge = 90) : base(random)
@@ -84,7 +87,7 @@ public class PersonSampler : AbstractSampler<PersonInfo>, ISampler<PersonInfo>
 
     #region Methods
 
-    public PersonInfo Next()
+    public override PersonInfo Next()
     {
         double daysInYear = 365.2425;
         var sex = sexSampler.Next();

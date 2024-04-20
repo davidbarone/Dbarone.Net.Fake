@@ -13,6 +13,5 @@ public class ProductSamplerTests {
         for (int i = 0; i<100; i++) {
             products.Add(ps.Next());
         }
-        var a = 1;
     }
 }

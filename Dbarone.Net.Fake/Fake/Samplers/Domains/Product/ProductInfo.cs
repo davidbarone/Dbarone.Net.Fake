@@ -43,12 +43,12 @@ public class ProductInfo
     /// <summary>
     /// The main material used.
     /// </summary>
-    public string Material { get; set; }
+    public string Material { get; set; } = default!;
 
     /// <summary>
     /// The main color of the product.
     /// </summary>
-    public string Color { get; set; }
+    public string Color { get; set; } = default!;
 
     #region Fields not currently used
 
@@ -58,6 +58,10 @@ public class ProductInfo
 
     #endregion
     
+    /// <summary>
+    /// Creates a new product from a product type.
+    /// </summary>
+    /// <param name="productType">The product type.</param>
     public ProductInfo(ProductTypeInfo productType)
     {
         this.Department = productType.Department;

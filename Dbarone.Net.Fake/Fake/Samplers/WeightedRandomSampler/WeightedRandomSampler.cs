@@ -41,12 +41,12 @@ public class WeightedRandomSampler<T> : AbstractSampler<T>, ISampler<T>
     #endregion
 
     #region Methods   
-    public T Next()
+    public override T Next()
     {
         // Get random number 0 <= x < TotalWeight
         var rand = this.Random.Next() * this.TotalWeight;
         var total = 0;
-        T? value = default;
+        T value = default!;
         for (int i = 0; i < this.data!.Count(); i++)
         {
             value = this.data![i].Value;

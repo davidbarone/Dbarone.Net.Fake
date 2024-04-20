@@ -13,7 +13,7 @@ public class MarkovChainSampler : AbstractSampler<string>, ISampler<string>
     /// <summary>
     /// Stores the current state.
     /// </summary>
-    private Queue<string>? CurrentState = null;
+    private Queue<string> CurrentState = new Queue<string>();
 
     #endregion
 
@@ -68,7 +68,7 @@ public class MarkovChainSampler : AbstractSampler<string>, ISampler<string>
         return selectedKey;
     }
 
-    public string Next()
+    public override string Next()
     {
         var rnd = Random.Next();
 

@@ -33,7 +33,7 @@ public class ProductSampler : AbstractSampler<ProductInfo>, ISampler<ProductInfo
         UniqueScandanavianWordSampler = new UniqueSampler<string>(sampler);
     }
 
-    public ProductInfo Next()
+    public override ProductInfo Next()
     {
         var productType = ProductTypesSampler.Next();
         var product = new ProductInfo(productType);

@@ -13,7 +13,5 @@ public class PersonSamplerTests {
         for (int i = 0; i<10; i++) {
             persons.Add(ps.Next());
         }
-        var a = 1;
     }
-
 }

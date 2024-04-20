@@ -30,6 +30,6 @@ public class AddressInfo : InfoObject
     /// <summary>
     /// The country.
     /// </summary>
-    public string Country { get; set; }
+    public string Country { get; set; } = default!;
 
 }

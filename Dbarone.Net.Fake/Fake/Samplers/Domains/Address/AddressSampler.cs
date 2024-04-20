@@ -1,6 +1,6 @@
 using Dbarone.Net.Fake;
 
-public class AddressSampler : ISampler<AddressInfo>
+public class AddressSampler : AbstractSampler<AddressInfo>, ISampler<AddressInfo>
 {
 	BoxMullerTransform StreetNumberSampler { get; set; }
 	WeightedRandomSampler<string> StreetNamesSimpleSampler { get; set; }
@@ -81,9 +81,7 @@ public class AddressSampler : ISampler<AddressInfo>
 		StreetPostcode = new Dictionary<string, int>();
 	}
 
-	public IRandom<double> Random { get; init; } = new Lcg();
-
-	public AddressInfo Next()
+	public override AddressInfo Next()
 	{
 		var rnd = Random.Next();
 

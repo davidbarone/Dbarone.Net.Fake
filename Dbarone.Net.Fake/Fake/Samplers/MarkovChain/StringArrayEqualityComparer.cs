@@ -2,9 +2,12 @@ namespace Dbarone.Net.Fake;
 
 public class StringArrayEqualityComparer : IEqualityComparer<string[]>
 {
-    public bool Equals(string[] x, string[] y)
+    public bool Equals(string[]? x, string[]? y)
     {
-        if (x.Length != y.Length)
+        if (x is null || y is null) {
+            return false;
+        }
+        else if (x.Length != y.Length)
         {
             return false;
         }

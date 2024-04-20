@@ -34,7 +34,7 @@ public class UniqueSampler<T> : AbstractSampler<T>, ISampler<T>
 
     #region Methods
 
-    public T Next()
+    public override T Next()
     {
         int attempt = 1;
         while (attempt <= maxAttempts)

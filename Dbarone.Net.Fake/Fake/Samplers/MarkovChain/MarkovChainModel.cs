@@ -40,6 +40,18 @@ public class MarkovChainModel
     /// <returns>Returns a MarkovChainModel instance.</returns>
     public static MarkovChainModel Deserialise(string json)
     {
-        return JsonSerializer.Deserialize<MarkovChainModel>(json);
+        if (string.IsNullOrEmpty(json))
+        {
+            throw new Exception("Cannot deserialise model json.");
+        }
+        var result = JsonSerializer.Deserialize<MarkovChainModel>(json);
+        if (result is null)
+        {
+            throw new Exception("Invalid deserialised result.");
+        }
+        else
+        {
+            return result;
+        }
     }
 }

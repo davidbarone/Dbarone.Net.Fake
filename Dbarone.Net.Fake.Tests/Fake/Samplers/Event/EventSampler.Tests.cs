@@ -12,7 +12,7 @@ public class EventSamplerTests
     public class TestEvent : IEvent
     {
         public DateTime EventDateTime { get; set; }
-        public string Value { get; set; }
+        public string Value { get; set; } = "";
     }
 
     [Fact]
