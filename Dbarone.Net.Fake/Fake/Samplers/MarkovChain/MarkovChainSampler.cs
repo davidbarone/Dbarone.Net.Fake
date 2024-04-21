@@ -20,17 +20,19 @@ public class MarkovChainSampler : AbstractSampler<string>, ISampler<string>
     #region Ctor
 
     /// <summary>
-    /// Default ctor.
+    /// Creates a new MarkovChainSampler instance from a pre-trained model.
     /// </summary>
+    /// <param name="model">The model to use.</param>
     public MarkovChainSampler(MarkovChainModel model) : base()
     {
         this.Model = model;
     }
 
     /// <summary>
-    /// Ctor with specified random number generator.
+    /// Creates a new MarkovChainSampler instance from a pre-trained model and a specified random number generator.
     /// </summary>
-    /// <param name="random"></param>
+    /// <param name="random">A provided random number generator.</param>
+    /// <param name="model">The model to use.</param>
     public MarkovChainSampler(MarkovChainModel model, IRandom<double> random) : base(random)
     {
         this.Model = model;

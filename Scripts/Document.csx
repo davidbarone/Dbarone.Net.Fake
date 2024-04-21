@@ -478,6 +478,11 @@ internal static string ToCodeBlock(this XElement el)
 internal static string CreateSignature(string id, IList<XElement> typeParameters, IList<XElement> parameters)
 {
     var idParts = new IdParts(id);
+
+    Console.WriteLine($"About to create signature: id = [{id}]...");
+    Console.WriteLine($"IdParts.Arguments: [{idParts.Arguments}]");
+
+
     // Generic type parameters on parent type (if applicable)
     List<string> currentTypeParameterNames = CurrentGenericTypeParameters.Select(p => p.Attribute("name").Value).ToList();
     // Generic type parameters on the method (if applicable)
