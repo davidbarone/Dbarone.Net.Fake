@@ -1,0 +1,7 @@
+{
+    "commentario.allowOverwrite": true,
+    "commentario.assemblyPath": "${workspaceFolder}/Dbarone.Net.Fake/bin/debug/net8.0/Dbarone.Net.Fake.dll",
+    "commentario.outputPath": "${workspaceFolder}/Dbarone.Net.Fake.html",
+    "commentario.readMePath": "",
+    "commentario.xmlCommentsPath": "${workspaceFolder}/Dbarone.Net.Fake/bin/debug/net8.0/Dbarone.Net.Fake.xml"
+}

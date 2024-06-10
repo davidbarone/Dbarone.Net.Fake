@@ -4,23 +4,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "document",
-      "type": "process",
-      "command": "dotnet",
-      "args": [
-        "script",
-        "./Scripts/Document.csx",
-        "${workspaceFolder}/Dbarone.Net.Fake/bin/Debug/net6.0/Dbarone.Net.Fake.xml",
-        "${workspaceFolder}/Documentation.md"
-      ],
-      "problemMatcher": [],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "dependsOn": ["build"]
-    },
-    {
       "label": "build",
       "command": "dotnet",
       "type": "process",
@@ -30,7 +13,8 @@
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
-      "problemMatcher": "$msCompile"
+      "problemMatcher": "$msCompile",
+      "group": "build"
     },
     {
       "label": "publish",
@@ -55,12 +39,6 @@
         "${workspaceFolder}/Dbarone.Net.Fake.Tests/Dbarone.Net.Fake.Tests.csproj"
       ],
       "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "Build and Document",
-      "dependsOn": ["document", "build"],
-      "problemMatcher": [],
-      "group": "build"
     }
   ]
 }

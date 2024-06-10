@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -13,7 +13,8 @@
     <Description>A .NET fake data generator library.</Description>
     <RepositoryUrl>https://github.com/davidbarone/Dbarone.Net.Fake</RepositoryUrl>
     <PackageProjectUrl>https://github.com/davidbarone/Dbarone.Net.Fake</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>    
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> 
   </PropertyGroup>
 
   <ItemGroup>
