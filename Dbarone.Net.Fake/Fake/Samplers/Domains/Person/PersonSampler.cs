@@ -25,8 +25,13 @@ public class PersonSampler : AbstractSampler<PersonInfo>, ISampler<PersonInfo>
         // PersonId sampler
         personIdSampler = new SequenceSampler(1, 1.1);
 
+        // Sex + Surname to have different seeds to ensure low entropy between the 2 variables:
+        var randomSex = new Lcg(1);
+        var randomSurname = new Lcg(2);
+
         // Sex sampler
         sexSampler = new WeightedRandomSampler<char>(
+            randomSex,
             new WeightedItem<char>('M', 1),
             new WeightedItem<char>('F', 1)
         );
@@ -47,7 +52,9 @@ public class PersonSampler : AbstractSampler<PersonInfo>, ISampler<PersonInfo>
         // Surname sample
         surnameSampler = new WeightedRandomSampler<string>(
             Dataset.GetData(DatasetEnum.Surnames_US_Census_2010)
-            .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])));
+            .Select(d => new WeightedItem<string>(d, d => (string)d["Value"])),
+            randomSurname
+            );
 
         MinAge = 10;
         MaxAge = 90;
