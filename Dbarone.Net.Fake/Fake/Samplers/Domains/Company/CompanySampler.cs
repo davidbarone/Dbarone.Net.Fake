@@ -20,7 +20,7 @@ public class CompanySampler : AbstractSampler<string>, ISampler<string>
     {
         var stochasticModelCompanies = Dataset.GetString(DatasetEnum.Stochastic_Model_Company);
         var companyModel = MarkovChainModel.Deserialise(stochasticModelCompanies);
-        CompanyNameSampler = new MarkovChainSampler(companyModel);
+        CompanyNameSampler = new MarkovChainSampler(companyModel, random);
     }
 
     #endregion
