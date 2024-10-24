@@ -29,6 +29,8 @@
     <Content Remove="Datasets\Stochastic_Model_Lorem_Ipsum.json" />
     <Content Remove="Datasets\Scandanavian_Words.csv" />
     <Content Remove="Datasets\Product_Types.csv" />
+    <Content Remove="Datasets\Stochastic_Model_Company.json" />
+
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Datasets\en_GB_Names_Boy.csv" />
@@ -42,6 +44,7 @@
     <EmbeddedResource Include="Datasets\Stochastic_Model_Lorem_Ipsum.json" />
     <EmbeddedResource Include="Datasets\Scandanavian_Words.csv" />
     <EmbeddedResource Include="Datasets\Product_Types.csv" />
+    <EmbeddedResource Include="Datasets\Stochastic_Model_Company.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dbarone.Net.Csv" Version="1.0.1" />

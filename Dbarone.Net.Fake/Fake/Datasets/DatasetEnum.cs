@@ -62,5 +62,10 @@ public enum DatasetEnum
     /// <summary>
     /// Metadata for product types, that can be used to generate actual products for a fake homewares store.
     /// </summary>
-    Product_Types
+    Product_Types,
+
+    /// <summary>
+    /// Stochastic model that can be used to generate company names. Model is trained on 'Forbes Global 2000' list of largest companies in the world.
+    /// </summary>
+    Stochastic_Model_Company
 }

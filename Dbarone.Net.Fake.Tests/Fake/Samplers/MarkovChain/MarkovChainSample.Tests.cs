@@ -150,7 +150,8 @@ public class MarkovChainSamplerTests
     }
 
     [Fact]
-    public void RegionCharacterSampler() {
+    public void RegionCharacterSampler()
+    {
         var corpus = "Aberdeen|Aberdeenshire|Adur|Allerdale|Amber Valley|Anglesey|Angus|Antrim|Ards|Argyll and Bute|Argyllshire|Armagh|Arun|Ashfield|Ashford|Aylesbury Vale|Ayrshire|Babergh|Ballymena|Ballymoney|Banbridge|Barking and Dagenham|Barnet|Barnsley|Barrow-in-Furness|Basildon|Bassetlaw|Bath and North East Somerset|Bedford|Belfast|Berkshire|Bexley|Bingley|Birmingham|Blackburn with Darwen|Blackpool|Blaenau Gwent|Bolsover|Bolton|Boston|Bournemouth|Bracknell Forest|Bradford|Braintree|Breckland|Brent|Brentwood|Bridgend|Brighton and Hove|Bristol|Broadstairs|Bromley|Bromsgrove|Bromsgrove Worcestershire|Broxbourne|Broxtowe|Burnley|Bury|Buteshire|Caerphilly|Calderdale|Cambridge|Camden|Cannock Chase|Canterbury|Cardiff|Carlisle|Carmarthenshire|Carrickfergus|Castle Point|Central Bedfordshire|Ceredigion|Charnwood|Chelmsford|Cherwell|Cheshire East|Cheshire West and Chester|Chesterfield|Chichester|Chiltern|Chorley|Christchurch|City of London|Colchester|Coleraine|Comhairle nan Eilean Siar|Conwy|Cookstown|Copeland|Corby|Cornwall|Cotswold|County Antrim|County Durham|Coventry|Craigavon|Craven|Crawley|Croydon|Dacorum|Darlington|Dartford|Daventry|Denbighshire|Derby|Derbyshire Dales|Derry|Doncaster|Down|Dudley|Dumfriesshire|Dundee|Dungannon and South Tyrone|Ealing|East Ayrshire|East Devon|East Dorset|East Dunbartonshire|East Hampshire|East Hertfordshire|East Lindsey|East Lothian|East Northamptonshire|East Renfrewshire|East Riding of Yorkshire|East Staffordshire|Eastbourne|Eastleigh|Eden|Edinburgh|Elmbridge|Ely|Enfield|Epping Forest|Epsom and Ewell|Erewash|Exeter|Falkirk|Fenland|Fermanagh|Fife|Flintshire|Folkestone|Forest Heath|Fylde|Gateshead|Gedling|Glasgow|Gloucester|Gravesham|Greenwich|Guildford|Gwynedd|Hackney|Halton|Hambleton|Hammersmith and Fulham|Hampshire|Harborough|Haringey|Harlow|Harrogate|Harrow|Hart|Hartlepool|Hastings|Havering|Hereford|Hertfordshire|Hertsmere|High Peak|Highland|Hillingdon|Hinckley and Bosworth|Horsham|Hounslow|Huntingdonshire|Hyndburn|Ipswich|Isle of Wight|Isles of Scilly|Islington|Kennet|Kensington and Chelsea|Kent|Kettering|Kingston upon Hull|Kingston upon Thames|Kinross-Shire|Kirkcudbrightshire|Kirklees|Knowsley|Lambeth|Lanarkshire|Lancaster|Larne|Leeds|Leicester|Lewes|Lewisham|Lichfield|Limavady|Lincoln|Lisburn|Liverpool|Llandrindod Wells|Luton|Magherafelt|Maidstone|Maldon|Malvern Hills|Manchester|Mansfield|Medway|Melton|Mendip|Merthyr Tydfil|Merton|Mid Devon|Mid Suffolk|Mid Sussex|Middlesbrough|Midlothian|Milton Keynes|Mole Valley|Monmouthshire|Moray|Moyle|Neath Port Talbot|New Forest|Newark and Sherwood|Newcastle|Newham|Newmarket|Newport|Newry and Mourne|Newtownabbey|Norfolk|North Ayrshire|North Dorset|North Down|North East Derbyshire|North East Lincolnshire|North Hertfordshire|North Kesteven|North Lanarkshire|North Lincolnshire|North Somerset|North Tyneside|North Warwickshire|North West Leicestershire|North Yorkshire|Northampton|Northumberland|Nottingham|Nuneaton & Bedworth|Oldham|Omagh|Orkney Islands|Oxford|Pembrokeshire|Pendle|Perth and Kinross|Peterborough|Plymouth|Poole|Powys|Preston|Purbeck|Ramsgate|Redbridge|Redcar & Cleveland|Redditch|Reigate and Banstead|Renfrewshire|Rhondda Cynon Taf|Ribble Valley|Richmond upon Thames|Ripon|Rochdale|Rochford|Rossendale|Rother|Rotherham|Rugby|Runnymede|Rushcliffe|Rushmoor|Rutland|Salford|Sandwell|Scottish Borders|Sedgemoor|Sefton|Selby|Sevenoaks|Sheffield|Shepway|Shetland|Shropshire|Slough|Solihull|Somerset|South Ayrshire|South Buckinghamshire|South Derbyshire|South Gloucestershire|South Hams|South Holland|South Kesteven|South Lakeland|South Lanarkshire|South Norfolk|South Northamptonshire|South Oxfordshire|South Ribble|South Somerset|South Staffordshire|South Tyneside|Southampton|Southend-on-Sea|Southwark|Spelthorne|St Albans|St Edmundsbury|St. Helens|Staffordshire|Stevenage|Stirling|Stockport|Stockton-on-Tees|Strabane|Stratford-on-Avon|Stroud|Suffolk|Suffolk Coastal|Sunderland|Surrey Heath|Sussex|Sutton|Swale|Swansea|Swindon|Tameside|Tamworth|Tandridge|Teignbridge|Telford and Wrekin|Tendring|Test Valley|Tewkesbury|Three Rivers|Thurrock|Tonbridge and Malling|Torbay|Torfaen|Torridge|Tower Hamlets|Trafford|Tunbridge Wells|Uttlesford|Vale of Glamorgan|Vale of White Horse|Wakefield|Walsall|Waltham Forest|Wandsworth|Warrington|Warwick|Watford|Waveney|Waverley|Wealden|Wellingborough|Welwyn Hatfield|West Berkshire|West Devon|West Dorset|West Dunbartonshire|West Lancashire|West Lindsey|West Lothian|West Norfolk|West Oxfordshire|Westminster|Weymouth and Portland|Wigan|Wigtownshire|Wiltshire|Winchester|Windsor and Maidenhead|Wirral|Woking|Wokingham|Wolverhampton|Worcester|Worthing|Wrexham|Wychavon|Wycombe|Wyre|Wyre Forest|York";
 
         MarkovChainTrainer trainer = new MarkovChainTrainer();
@@ -200,8 +201,9 @@ public class MarkovChainSamplerTests
     }
 
     [Fact]
-    public void TestScandanavianWords() {
-        var data = Dataset.GetData(DatasetEnum.Scandanavian_Words).Select(w=>(string)w["Word"]).ToList();
+    public void TestScandanavianWords()
+    {
+        var data = Dataset.GetData(DatasetEnum.Scandanavian_Words).Select(w => (string)w["Word"]).ToList();
         var corpus = string.Join("|", data);
 
         MarkovChainTrainer trainer = new MarkovChainTrainer();
@@ -222,7 +224,22 @@ public class MarkovChainSamplerTests
         }
         var actual = string.Join(", ", words);
         Assert.Equal("Milton, Harsundda, Inez, Vilmar, Marstadsvin, Mysen, Gräsk, Marsund, Stellen, Bonnin", actual); // 10 Scandanavian sounding words.
+    }
 
+    [Fact]
+    public void TestCompanies()
+    {
+        var stochasticModelCompanies = Dataset.GetString(DatasetEnum.Stochastic_Model_Company);
+        var companyModel = MarkovChainModel.Deserialise(stochasticModelCompanies);
+        var companySampler = new MarkovChainSampler(companyModel);
+        UniqueSampler<string> uniqueSampler = new UniqueSampler<string>(companySampler);
 
+        List<string> results = new List<string>();
+        for (int i = 0; i < 10; i++)
+        {
+            results.Add(uniqueSampler.Next());
+        }
+        var actual = string.Join(", ", results);
+        Assert.Equal("Enbrials, Hyundai Motor, Uni-Precines, Toyotal Technologies, BP, Norf, WW Group, Alpharp, AflackRoche Wens Financo, Mettalurgical", actual); // 10 company-sounding values.
     }
 }
